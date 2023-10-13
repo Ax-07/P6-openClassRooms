@@ -1,0 +1,43 @@
+.filter {
+    width: fit-content;
+    margin: 51px auto;
+
+    &__list {
+        @include flex(row, space-between, center);
+        gap: 10px;
+    }
+    &__item {
+        @include flex(row, center, center);
+        position: relative;
+        z-index: 0;
+        border: 1px solid #1d6154;
+        border-radius: 60px;
+        width: 100px;
+        height: 37px;
+        &--Appartements {
+            width: 157px;
+        }
+        &--Hotelsrestaurants {
+            width: 198px;
+        }
+
+        
+    }
+    &__input {
+        display: none;
+    }
+    &__label {
+        @include flex(row, center, center);
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        &-text {
+            font-size: 16px;
+            margin: 0 !important;
+        }
+    }
+}
+.active {
+    background-color: #1d6154;
+    color: #fff;
+}
