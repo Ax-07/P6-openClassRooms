@@ -1,9 +1,6 @@
-import { All_data } from "../api/Works_API.js";
 import { Gallery } from "../containers/Gallery.js";
 
 export const Filter = async (works) => {
-    const datas = await All_data();
-    console.log("datas :", datas);
 
     let selectedFilter = "Tous";
 
