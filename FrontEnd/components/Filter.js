@@ -1,4 +1,4 @@
-import { Gallery } from "../containers/Gallery.js";
+import { Gallery_page } from "../containers/Gallery.js";
 
 export const Filter = async (works) => {
 
@@ -12,7 +12,7 @@ export const Filter = async (works) => {
             return acc;
         }, []);
         filter_categories = ["Tous", ...filter_categories];
-        
+
         console.log("filter_categories :", filter_categories);
 
         const filter = document.querySelector('.filter');
@@ -21,27 +21,17 @@ export const Filter = async (works) => {
         filter.appendChild(filter__list);
 
         filter_categories.forEach((category) => {
+            // #region filter list item
             const filter__item = document.createElement('li');
-            filter__item.classList.add('filter__item',`filter__item--${category.replace(/[&\s]/g, "")}`);
-            
+            filter__item.classList.add('filter__item', `filter__item--${category.replace(/[&\s]/g, "")}`);
+            // #endregion filter list item
+            // #region filter input
             const filter_input = document.createElement('input');
             filter_input.classList.add('filter__input');
             filter_input.type = 'radio';
             filter_input.name = 'filter';
             filter_input.id = category;
             filter_input.value = category;
-            
-            const filter_label = document.createElement('label');
-            filter_label.classList.add('filter__label');
-            const filter_label_text = document.createElement('h2');
-            filter_label_text.classList.add('filter__label-text');
-            filter_label_text.innerText = category;
-            filter_label.htmlFor = category;
-
-            filter_label.appendChild(filter_label_text);
-            filter__item.appendChild(filter_input);
-            filter__item.appendChild(filter_label); 
-            filter__list.appendChild(filter__item);
 
             filter_input.addEventListener('click', () => {
                 filter_categories.forEach((category) => {
@@ -53,12 +43,25 @@ export const Filter = async (works) => {
                 filter__item.classList.add('active');
                 const label_text = filter__item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément
                 label_text.classList.add('active');
-                
+
                 selectedFilter = filter_input.value;
                 console.log('Filtre sélectionné :', selectedFilter);
-                Gallery(works, selectedFilter);
+                Gallery_page(works, selectedFilter);
             });
-            
+            // #endregion filter input
+            // #region filter label
+            const filter_label = document.createElement('label');
+            filter_label.classList.add('filter__label');
+            const filter_label_text = document.createElement('h2');
+            filter_label_text.classList.add('filter__label-text');
+            filter_label_text.innerText = category;
+            filter_label.htmlFor = category;
+            // #endregion filter label
+
+            filter_label.appendChild(filter_label_text);
+            filter__item.appendChild(filter_input);
+            filter__item.appendChild(filter_label);
+            filter__list.appendChild(filter__item);
         });
     }
     else {

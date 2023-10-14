@@ -1,6 +1,8 @@
 import { All_data } from './api/Works_API.js';
-import { Gallery } from './containers/Gallery.js';
+import { Gallery_page } from './containers/Gallery.js';
 import { Filter } from './components/Filter.js';
+import { Edit_modal } from './components/Edit_modal.js';
+import { Modal} from "./components/Modal.js";
 
 const App = async () => {
     const datas = await All_data();
@@ -8,7 +10,9 @@ const App = async () => {
     const selectedFilter = await Filter(works);
     console.log("selectedFilter app :", selectedFilter);
 
-    Gallery(works, selectedFilter);
+    Edit_modal();
+    Gallery_page(works, selectedFilter);
+    Modal(works);
 
 }
 window.onload = App;

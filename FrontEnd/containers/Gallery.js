@@ -1,6 +1,6 @@
 import { createPicture } from "../components/Picture.js";
 
-export const Gallery = (works, selectedFilter) => {
+export const Gallery_page = (works, selectedFilter) => {
     const gallery = document.querySelector('.gallery');
     
     const updateGallery = () => {
@@ -22,3 +22,12 @@ export const Gallery = (works, selectedFilter) => {
 
     return gallery;
 };
+
+export const Gallery_modal = (works, modal_gallery) => {
+    works.forEach(work => {
+        const picture = createPicture(work.imageUrl, work.title);
+        modal_gallery.appendChild(picture);
+    });
+};
+
+

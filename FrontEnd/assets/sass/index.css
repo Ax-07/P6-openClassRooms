@@ -81,4 +81,117 @@
   height: 36px;
   border: none;
   margin-top: 7px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 59px;
+  width: 100%;
+  background-color: #000;
+  display: none;
+}
+.edit__btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.edit__btn::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f044";
+  font-weight: 400;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 630px;
+  height: 688px;
+  border-radius: 10px;
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: none;
+}
+.modal__background {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.modal__close {
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  padding: 1.5px 4.5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal__close::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f00d";
+  font-size: 20px;
+  color: #000;
+}
+.modal__title {
+  margin-top: 60px;
+  margin-bottom: 46px;
+  color: #000;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: normal;
+}
+.modal__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 105px;
+  gap: 29.5px 8px;
+}
+.modal__gallery img {
+  width: 76.9px;
+  height: 103px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal__gallery figcaption {
+  display: none;
+}
+.modal__line {
+  position: absolute;
+  bottom: 119px;
+  width: 420px;
+  height: 1px;
+  background-color: #B3B3B3;
+}
+.modal__btn {
+  position: absolute;
+  bottom: 45px;
+  width: 237px;
+  height: 36px;
+  border: none;
+  border-radius: 60px;
+  color: #fff;
+  background: #1D6154;
 }/*# sourceMappingURL=index.css.map */
