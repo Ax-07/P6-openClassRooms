@@ -1,0 +1,22 @@
+.add-work {
+    @include flex(column, center, center);
+    &__label {
+        @include flex(column, center, center);
+        &--picture {
+            border: 1px dashed #ccc;
+            background-color: aquamarine;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    &__input {
+        &[type="file"] {
+            display: none;
+        }
+        @include flex(column, center, center);
+
+        
+    }
+    &__btn {}
+}

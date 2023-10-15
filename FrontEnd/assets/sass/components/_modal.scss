@@ -60,6 +60,10 @@
             margin: 0 105px;
             gap: 29.5px 8px;
 
+            figure {
+                position: relative;
+            }
+
          img {
             width: 76.9px;
             height: 103px;
@@ -71,6 +75,11 @@
         }
 
 
+    }
+    &__add-picture {
+        display: none;
+            margin: 0 105px;
+            gap: 29.5px 8px;
     }
 
     &__line {

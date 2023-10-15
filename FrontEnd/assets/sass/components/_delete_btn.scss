@@ -1,0 +1,19 @@
+.delete__btn {
+    position: absolute;
+    @include flex(row, center, center);
+    top: 6px;
+    right: 6px;
+    width: 17px;
+    border-radius: 2px;
+    background: black;
+    cursor: pointer;
+
+    &::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\f2ed";
+        font-size: 11px;
+        line-height: 17px;
+        color: #fff;
+    }
+}

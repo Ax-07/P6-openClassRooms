@@ -13,7 +13,7 @@ export const Gallery_page = (works, selectedFilter) => {
 
         // Afficher les travaux filtrés
         filteredWorks.forEach(work => {
-            const picture = createPicture(work.imageUrl, work.title);
+            const picture = createPicture(work.imageUrl, work.title, false);
             gallery.appendChild(picture);
         });
     };
@@ -25,9 +25,7 @@ export const Gallery_page = (works, selectedFilter) => {
 
 export const Gallery_modal = (works, modal_gallery) => {
     works.forEach(work => {
-        const picture = createPicture(work.imageUrl, work.title);
+        const picture = createPicture(work.imageUrl, work.title, true);
         modal_gallery.appendChild(picture);
     });
 };
-
-
