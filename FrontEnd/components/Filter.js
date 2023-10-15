@@ -3,15 +3,14 @@ import { Gallery_page } from "../containers/Gallery.js";
 export const Filter = async (works) => {
 
     let selectedFilter = "Tous";
+    let filter_categories = new Set(["Tous"]);
 
     if (works) {
-        let filter_categories = works.reduce((acc, work) => {
-            if (work.category.name && !acc.includes(work.category.name)) {
-                acc.push(work.category.name);
+        works.forEach((work) => {
+            if (work.category.name) {
+                filter_categories.add(work.category.name);
             }
-            return acc;
-        }, []);
-        filter_categories = ["Tous", ...filter_categories];
+        });
 
         console.log("filter_categories :", filter_categories);
 
