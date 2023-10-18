@@ -67,5 +67,5 @@ export const Filter = async (works) => {
         console.error("Une erreur s'est produite lors de la récupération des données.");
     }
 
-    return selectedFilter;
+    return {selectedFilter, filter_categories};
 }

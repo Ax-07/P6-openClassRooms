@@ -1,4 +1,4 @@
-import { Login } from "../api/Log.js";
+import { Login } from "../../api/Log.js";
 
 // Fonction pour créer le formulaire de connexion
 export const LoginForm = () => {
@@ -59,17 +59,16 @@ export const LoginForm = () => {
     login_form.appendChild(login_input_password);
     login_form.appendChild(login_submit_button);
     
-
-    login_form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        Login();
-        console.log("Connexion tenter !");
-    });
-    
     login.appendChild(login_title);
     login.appendChild(login_form);
     login.appendChild(login_forgot_password_link);
 
+    login_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        Login();
+        console.log("Connexion");
+    });
+    
     return login;
 };
 LoginForm();

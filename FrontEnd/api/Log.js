@@ -35,3 +35,15 @@ export const Login = () => {
     });
 };
 
+export const Logout = () => {
+    try {
+        const token = localStorage.getItem("token");
+        console.log("token: ",token);
+        console.log("Déconnexion réussie !");
+        localStorage.removeItem("token");
+        window.location.href = "http://localhost:5500/FrontEnd";
+    }
+    catch (error) {
+        console.error("Erreur inattendue : " + error);
+    }
+}

@@ -23,6 +23,27 @@
         z-index: 1;
     }
 
+    &__back {
+        display: none;
+        position: absolute;
+        top: 26px;
+        left: 30px;
+
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: "\f060";
+            font-size: 21px;
+            width: 21px;
+            line-height: 21px;
+            color: #000;
+        }
+    }
+
     &__close {
         position: absolute;
         top: 26px;
@@ -39,7 +60,6 @@
             content: "\f00d";
             font-size: 20px;
             color: #000;
-
         }
     }
 
@@ -91,16 +111,17 @@
     }
 
     &__btn {
-        position: absolute;
-        bottom: 45px;
-
-        width: 237px;
-        height: 36px;
-
-        border: none;
-        border-radius: 60px;
-        color: #fff;
-        background: #1D6154;
-
     }
+}
+.btn-primary {
+    position: absolute;
+    bottom: 45px;
+
+    width: 237px;
+    height: 36px;
+
+    border: none;
+    border-radius: 60px;
+    color: #fff;
+    background: #1D6154;
 }

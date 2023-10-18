@@ -137,6 +137,24 @@
   left: 0;
   z-index: 1;
 }
+.modal__back {
+  display: none;
+  position: absolute;
+  top: 26px;
+  left: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal__back::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f060";
+  font-size: 21px;
+  width: 21px;
+  line-height: 21px;
+  color: #000;
+}
 .modal__close {
   position: absolute;
   top: 26px;
@@ -193,7 +211,7 @@
   height: 1px;
   background-color: #B3B3B3;
 }
-.modal__btn {
+.btn-primary {
   position: absolute;
   bottom: 45px;
   width: 237px;
@@ -237,19 +255,185 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.add-work__label--background {
+  width: 420px;
+  height: 169px;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  background: #E8F1F6;
 }
 .add-work__label--picture {
-  border: 1px dashed #ccc;
-  background-color: aquamarine;
-  border-radius: 5px;
+  font-size: 76px;
+  color: #b9c5cc;
+  margin-bottom: 6px;
+}
+.add-work__label--preview-picture {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.add-work__label--picture-btn {
+  width: 173px;
+  height: 36px;
+  background-color: #CBD6DC;
+  border-radius: 50px;
   cursor: pointer;
+  margin-bottom: 7px;
+  color: #306685;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.add-work__label--picture-txt {
+  font-size: 10px;
+  color: #444444;
+  margin-bottom: 19px;
+}
+.add-work__label--txt {
+  width: 100%;
+  font-family: Work Sans;
+  position: relative;
+  left: 0;
+  font-size: 14px;
+  font-weight: 500px;
+  color: #3d3d3d;
+  margin-bottom: 10px;
 }
 .add-work__input {
+  width: 100%;
+  height: 51px;
+  margin-bottom: 21px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.add-work__input--title {
+  padding-left: 10px;
+}
+.add-work__input--select {
+  position: relative;
+  background-color: transparent;
+  justify-content: center;
+  align-items: flex-start;
+}
+.add-work__input--select::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f078";
+  font-size: 12px;
+  color: #6c6c6c;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.add-work__input--select.active::after {
+  content: "\f077";
+}
+.add-work__input--select > select {
+  display: none;
+}
 .add-work__input[type=file] {
   display: none;
+}
+.add-work__custom-select-value {
+  position: absolute;
+  z-index: 11;
+  padding: 10px;
+  color: #444444; /* Ajoutez la couleur du texte */
+}
+.add-work__custom-select-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  display: none;
+}
+.add-work__custom-select-items.display {
+  display: flex;
+}
+.add-work__custom-select-item {
+  width: 100%;
+  line-height: 20px;
+  padding: 0 20px;
+  background-color: #fff;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  cursor: pointer;
+  color: #444444;
+}
+.add-work__custom-select-item:hover {
+  background-color: #E8F1F6;
+}
+.add-work__btn {
+  margin: 0 !important;
+  bottom: 55px;
+}
+
+.add-picture {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.add-picture__wrapper {
+  width: 420px;
+  height: 169px;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  background: #E8F1F6;
+}
+.add-picture__icon {
+  font-size: 76px;
+  color: #b9c5cc;
+  margin-bottom: 6px;
+}
+.add-picture__btn {
+  width: 173px;
+  height: 36px;
+  background-color: #CBD6DC;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-bottom: 7px;
+  color: #306685;
+  text-align: center;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.add-picture__input {
+  display: none;
+}
+.add-picture__txt {
+  font-size: 10px;
+  color: #444444;
+  margin-bottom: 19px;
+}
+.add-picture__preview {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=index.css.map */
