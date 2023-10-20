@@ -1,0 +1,68 @@
+.custom-select {
+    // @include flex(column, center, flex-start);
+
+    &__wrapper {
+        position: relative;
+        border: none;
+        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+
+        &::after {
+            content: "\f078";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 12px;
+            position: absolute;
+            right: 28.82px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c6c6c;
+        }
+
+        &.opened::after {
+            content: "\f077";
+        }
+
+        >select {
+            display: none;
+        }
+    }
+
+    &__value {
+        position: absolute;
+        z-index: 11;
+        font-size: 16px;
+        line-height: 51px;
+        padding-left: 10px;
+        color: #444444;
+    }
+
+    &__list {
+        width: 100%;
+        position: relative;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+        display: none;
+
+        &.display {
+            display: block;
+        }
+    }
+
+    &__item {
+        width: 100%;
+        line-height: 20px;
+        padding: 0 20px;
+        background-color: #fff;
+        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+        cursor: pointer;
+        color: #444444;
+
+        &:hover {
+            background-color: #E8F1F6;
+        }
+    }
+}
