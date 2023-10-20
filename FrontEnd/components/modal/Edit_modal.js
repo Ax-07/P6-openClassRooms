@@ -3,8 +3,9 @@ export const Edit_modal = () => {
     if (!user) {
         return;
     }
-    const edit = document.querySelector('.edit');
-    edit.setAttribute('style', 'display: flex;');
+    const edit_banner = document.querySelector('.edit__banner');
+    edit_banner.setAttribute('style', 'display: flex;');
+
     const edit_btn = document.createElement('span');
     edit_btn.classList.add('edit__btn');
     edit_btn.innerText = 'Mode édition';
@@ -18,5 +19,5 @@ export const Edit_modal = () => {
         modal_background.setAttribute('style', 'display: flex;');
     });
 
-    edit.appendChild(edit_btn);
+    edit_banner.appendChild(edit_btn);
 }

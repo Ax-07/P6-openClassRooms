@@ -1,9 +1,12 @@
 .edit {
-    @include flex(row, center, center);
-    height: 59px;
-    width: 100%;
-    background-color: #000;
-    display: none;
+    &__banner {
+        @include flex(row, center, center);
+        height: 59px;
+        width: 100%;
+        background-color: #000;
+        display: none;
+
+    }
 
     &__btn {
         @include flex(row, center, center);
