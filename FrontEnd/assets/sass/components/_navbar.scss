@@ -1,0 +1,11 @@
+.navbar {
+    &__list {}
+    &__item {
+        cursor: pointer;
+    }
+    &__link {
+        &--active {
+            font-weight: bold;
+        }
+    }
+}
