@@ -24,11 +24,14 @@ export const Login = () => {
         }
     })
     .then((data) => {
+        const userId = data.userId;
         const token = data.token;
+        console.log("userId: ",userId);
         console.log("token: ",token);
         console.log("Connexion réussie !");
+        localStorage.setItem("userId", userId);
         localStorage.setItem("token", token);
-        window.location.href = "http://localhost:5500/FrontEnd";
+        window.location.href = "http://localhost:5500";
     })
     .catch((error) => {
         console.error("Erreur inattendue : " + error);
@@ -41,7 +44,7 @@ export const Logout = () => {
         console.log("token: ",token);
         console.log("Déconnexion réussie !");
         localStorage.removeItem("token");
-        window.location.href = "http://localhost:5500/FrontEnd";
+        window.location.href = "http://localhost:5500";
     }
     catch (error) {
         console.error("Erreur inattendue : " + error);
