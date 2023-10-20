@@ -1,0 +1,77 @@
+main {
+    padding: 0 95px;
+}
+
+#introduction {
+    display: flex;
+    align-items: center;
+    margin: 139px 0;
+
+    & figure {
+        flex: 1;
+        margin-right: 72px;
+    }
+
+    & img {
+        display: block;
+        margin: auto;
+        width: 474px;
+    }
+
+    & article {
+        flex: 1;
+    }
+
+    & h2 {
+        margin-bottom: 1em;
+    }
+
+    & p {
+        margin-bottom: 0.5em;
+    }
+}
+
+#portfolio {
+    margin-bottom: 57px;
+
+    & h2 {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+}
+
+#contact {
+    width: 404px;
+    margin: auto;
+    text-align: center;
+
+    & h2 {
+        margin-bottom: 9px;
+    }
+
+    & p {}
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        margin: 0 12px 0 13px;
+        text-align: left;
+    }
+    & input  {
+        height: 51px;
+        font-size: 1.2em;
+        border: none;
+        box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    }
+
+    & label {
+        margin: 2em 0 1em 0;
+    }
+
+    & textarea {
+        font-family: 'Work sans';
+        border: none;
+        box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    }
+
+}
