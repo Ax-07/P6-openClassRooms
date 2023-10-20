@@ -17,7 +17,7 @@ export const LoginForm = () => {
     const login_label_email = document.createElement('label');
     login_label_email.htmlFor = 'email';
     login_label_email.classList.add('login__label');
-    login_label_email.innerText = 'Email';
+    login_label_email.innerText = 'E-mail';
 // #endregion label email
 // #region input email
     const login_input_email = document.createElement('input');
@@ -26,6 +26,12 @@ export const LoginForm = () => {
     login_input_email.id = 'email';
     login_input_email.classList.add('login__input');
 // #endregion input email
+//#region email error
+    const login_email_error = document.createElement('p');
+    login_email_error.classList.add('login__error');
+    login_email_error.innerText = '❌ Email incorrect';
+    login_email_error.style.display = 'none';
+// #endregion email error
 // #region label password
     const login_label_password = document.createElement('label');
     login_label_password.htmlFor = 'password';
@@ -39,6 +45,12 @@ export const LoginForm = () => {
     login_input_password.id = 'password';
     login_input_password.classList.add('login__input');
 // #endregion input password
+// #region password error
+    const login_password_error = document.createElement('p');
+    login_password_error.classList.add('login__error');
+    login_password_error.innerText = 'Mot de passe incorrect';
+    login_password_error.style.display = 'none';
+// #endregion password error
 // #region submit button
     const login_submit_button = document.createElement('input');
     login_submit_button.type = 'submit';
@@ -55,20 +67,47 @@ export const LoginForm = () => {
 
     login_form.appendChild(login_label_email);
     login_form.appendChild(login_input_email);
+    login_form.appendChild(login_email_error);
     login_form.appendChild(login_label_password);
     login_form.appendChild(login_input_password);
+    login_form.appendChild(login_password_error);
     login_form.appendChild(login_submit_button);
     
     login.appendChild(login_title);
     login.appendChild(login_form);
     login.appendChild(login_forgot_password_link);
 
+    login_input_email.addEventListener('input', function (e) {
+        const emailValue = login_input_email.value;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+        if (!emailRegex.test(emailValue)) {
+            login_email_error.style.display = 'block';
+            login_email_error.innerText = '❌ Email incorrect';
+            login_input_email.style.boxShadow = '0 0 4px 12px rgba(255,0,0,0.5)';
+        } else {
+            login_email_error.style.display = 'block';
+            login_email_error.innerText = '✔️ Email correct';
+            login_input_email.style.boxShadow = '2px 2px 2px rgba(0,255,0,0.5)';
+        }
+    });
+
     login_form.addEventListener('submit', (e) => {
         e.preventDefault();
+        if (login_input_email.value === '') {
+            login_email_error.style.display = 'block';
+        } else {
+            login_email_error.style.display = 'none';
+        }
+        if (login_input_password.value === '') {
+            login_password_error.style.display = 'block';
+        } else {
+            login_password_error.style.display = 'none';
+        }
+
         Login();
         console.log("Connexion");
     });
     
     return login;
 };
-LoginForm();
