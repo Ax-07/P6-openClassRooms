@@ -1,18 +1,21 @@
 .add-picture {
-    @include flex(column, center, center);
-    position: relative;
-    &__wrapper {
-        width: 420px;
-        height: 169px;
-        margin-bottom: 30px;
+    width: 420px;
+    height: 169px;
+    margin-bottom: 30px;
 
-        border-radius: 3px;
-        background: #E8F1F6;
+    border-radius: 3px;
+    background: #E8F1F6;
+
+    &__wrapper {
+        @include flex(column, center, center);
+        position: relative;
     }
     &__icon {
         font-size: 76px;
+        height: 76px;
+        width: 76px;
         color: #b9c5cc;
-        margin-bottom: 6px;
+        margin: 13px 0 6px;
     }
     &__btn {
         width: 173px;
@@ -38,9 +41,10 @@
         margin-bottom: 19px;
     }
     &__preview {
-        position: absolute;
-        z-index: 10;
-        top: 0;
+        display: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
         height: 100%;
         object-fit: cover;
     }

@@ -4,35 +4,12 @@ import { Create_data } from '../../api/Works_API.js';
 
 export const AddWorkFormUI = (categories) => {
 
-    const add_work = document.createElement('form');
-    add_work.id = 'add_work';
-    add_work.classList.add('add-work');
+    const add_work = document.querySelector('.add-work');
+    const add_work_input_title = document.querySelector('.add-work__input--title');
+    const add_work_submit_button = document.querySelector('.add-work__submit-button');
 
-    const { add_picture_container, add_picture_input } = AddPicture();
-
-    const add_work_label_title = document.createElement('label');
-    add_work_label_title.htmlFor = 'title';
-    add_work_label_title.classList.add('add-work__label');
-    add_work_label_title.innerText = 'Titre';
-
-    const add_work_input_title = document.createElement('input');
-    add_work_input_title.type = 'text';
-    add_work_input_title.name = 'title';
-    add_work_input_title.id = 'title';
-    add_work_input_title.classList.add('add-work__input', 'add-work__input--title');
-
-    const add_work_label_category = document.createElement('label');
-    add_work_label_category.htmlFor = 'category';
-    add_work_label_category.classList.add('add-work__label');
-    add_work_label_category.innerText = 'Catégorie';
-
-    const {custom_select, add_work_select_category} = CustomSelectUI(categories, checkFields);
-
-    const add_work_submit_button = document.createElement('input');
-    add_work_submit_button.type = 'submit';
-    add_work_submit_button.value = 'Ajouter';
-    add_work_submit_button.classList.add('add-work__btn','btn-primary');
-    add_work_submit_button.disabled = true;
+    const {add_picture_input } = AddPicture();
+    const {add_work_select_category} = CustomSelectUI(categories, checkFields);
 
     add_picture_input.addEventListener('input', checkFields);
     add_work_input_title.addEventListener('input', checkFields);
@@ -65,19 +42,9 @@ add_work.addEventListener('submit', (e) => {
         form_data.append('image', pictureValue);
 
         const data = Create_data(form_data);
-        
         console.log('data:', data);
     }
 });
-
-
-    add_work.appendChild(add_picture_container);
-    add_work.appendChild(add_work_label_title);
-    add_work.appendChild(add_work_input_title);
-    add_work.appendChild(add_work_label_category);
-    add_work.appendChild(custom_select);
-
-    add_work.appendChild(add_work_submit_button);
     
     return add_work
 };

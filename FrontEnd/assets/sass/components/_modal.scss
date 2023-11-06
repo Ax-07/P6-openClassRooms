@@ -23,7 +23,7 @@
         z-index: 1;
     }
 
-    &__back {
+    &__btn-back {
         display: none;
         position: absolute;
         top: 26px;
@@ -44,7 +44,7 @@
         }
     }
 
-    &__close {
+    &__btn-close {
         position: absolute;
         top: 26px;
         right: 30px;
@@ -96,7 +96,7 @@
 
 
     }
-    &__add-picture {
+    &__add-work {
         display: none;
             margin: 0 105px;
             gap: 29.5px 8px;
