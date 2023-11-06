@@ -1,31 +1,31 @@
-import { createPicture } from "../components/Picture.js";
+import { createCard } from "../components/createWork.js";
 
-export const Gallery_page = (works, selectedFilter) => {
-    const gallery = document.querySelector('.gallery');
-    
+const gallery = document.querySelector('.gallery');
+
+const filterWorks = (works, selectedFilter) => {
+    return selectedFilter === "Tous" ? works : works.filter(work => work.category.name === selectedFilter);
+}
+const createGalleryContent = (gallery, filteredWorks, isInModal) => {
+    gallery.innerHTML = '';
+    filteredWorks.forEach(work => {
+        const card = createCard(work, isInModal);
+        gallery.appendChild(card);
+    });
+}
+
+export const createGallery = (works, selectedFilter) => {
     const updateGallery = () => {
-        // Filtrer les travaux en fonction du filtre sélectionné
-        const filteredWorks = selectedFilter === "Tous" ? works : works.filter(work => work.category.name === selectedFilter);
-        console.log("filteredWorks :", filteredWorks);
-
-        // Supprimez toutes les images actuellement affichées dans la galerie
-        gallery.innerHTML = '';
-
-        // Afficher les travaux filtrés
-        filteredWorks.forEach(work => {
-            const picture = createPicture(work, false);
-            gallery.appendChild(picture);
-        });
+        const filteredWorks = filterWorks(works, selectedFilter);
+        createGalleryContent(gallery, filteredWorks, false);
     };
-
     updateGallery();
 
     return gallery;
 };
 
-export const Gallery_modal = (works, modal_gallery) => {
+export const createGalleryModal = (works, modalGallery) => {
     works.forEach(work => {
-        const picture = createPicture(work, true);
-        modal_gallery.appendChild(picture);
+        const modalCard = createCard(work, true);
+        modalGallery.appendChild(modalCard);
     });
 };
