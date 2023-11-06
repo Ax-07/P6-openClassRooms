@@ -1,31 +1,27 @@
 .custom-select {
     // @include flex(column, center, flex-start);
+    position: relative;
 
-    &__wrapper {
-        position: relative;
-        border: none;
-        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
-
-        &::after {
-            content: "\f078";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            font-size: 12px;
-            position: absolute;
-            right: 28.82px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c6c6c;
-        }
-
-        &.opened::after {
-            content: "\f077";
-        }
-
-        >select {
-            display: none;
-        }
+    &::after {
+        content: "\f078";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 12px;
+        position: absolute;
+        right: 28.82px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c6c6c;
     }
+
+    &.opened::after {
+        content: "\f077";
+    }
+
+    >select {
+        display: none;
+    }
+
 
     &__value {
         position: absolute;
