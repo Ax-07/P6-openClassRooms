@@ -32,7 +32,19 @@
             </nav>
         </header>
         <main>
-            <section id="login" class="login"></section>
+            <section id="login" class="login">
+                <h2 class="login__title">Login</h2>
+                <form id="login_form" class="login__form">
+                    <label for="email" class="login__label">E-mail</label>
+                    <input type="email" name="email" id="email" class="login__input">
+                    <p id="email_error" class="login__error">❌ Email incorrect</p>
+                    <label for="password" class="login__label">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="login__input">
+                    <p id="password_error" class="login__error">❌ Mot de passe incorrect</p>
+                    <input id="login_submit" type="submit" class="login__btn" value="Se connecter">
+                </form>
+                <a href="#" class="login__link">Mot de passe oublié ?</a>
+            </section>
         </main>
     </div>
     <footer class="footer footer-login">
