@@ -1,4 +1,4 @@
-import { Gallery_modal } from '../../containers/Gallery.js';
+import { createGalleryModal } from '../../containers/createGallery.js';
 import { AddWorkFormUI } from './AddWorkForm.js';
 
 const body = document.querySelector('body');
@@ -51,7 +51,7 @@ export const Modal = (works, categories) => {
         modalEvent.addPicture();
     });
 
-    Gallery_modal(works, modal_gallery);
+    createGalleryModal(works, modal_gallery);
 
     const add_work = AddWorkFormUI(categories);
 
