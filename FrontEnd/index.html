@@ -75,6 +75,46 @@
 			</ul>
 		</nav>
 	</footer>
+	<div class="modal__background"></div>
+	<aside class="modal" id="modal">
+		<span class="modal__btn-back"></span>
+		<button class="modal__btn-close"></button>
+		<h2 class="modal__title">Galerie photo</h2>
+		<div class="modal__gallery"></div>
+		<div class="modal__add-work">
+			<form id="add_work" class="add-work" action="">
+				<div class="add-picture">
+					<img id="picture-preview" class="add-picture__preview">
+					<div class="add-picture__wrapper">
+						<span class="add-picture__icon fa-regular fa-image"></span>
+						<label for="picture" class="add-picture__wrapper add-picture__btn">+ Ajouter une photo</label>
+						<input type="file" name="picture" id="picture" class="add-picture__input">
+						<p class="add-picture__txt">jpg, png : 4mo max</p>
+					</div>
+				</div>
+				<label for="title" class="add-work__label">Titre</label>
+				<input type="text" id="title" name="title" class="add-work__input add-work__input--title">
+				<label for="category" class="add-work__label">Catégorie</label>
+				<div class="add-work__input custom-select">
+					<p class="custom-select__value"></p>
+					<ul class="custom-select__list">
+						<li class="custom-select__item">Objets</li>
+						<li class="custom-select__item">Appartements</li>
+						<li class="custom-select__item">Hotels & restaurants</li>
+					</ul>
+					<select name="category" id="category">
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+				</div>
+				<input type="submit" class="add-work__btn add-work__submit-button btn-primary" disabled="true"
+					value="Ajouter">
+			</form>
+		</div>
+		<span class="modal__line"></span>
+		<button class="modal__btn btn-primary">Ajouter une photo</button>
+	</aside>
 	<script type="module" src="./App.js" defer></script>
 </body>
 
