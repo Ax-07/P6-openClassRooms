@@ -2,10 +2,14 @@ main {
     padding: 0 95px;
 }
 
-#introduction {
+.introduction {
     display: flex;
     align-items: center;
     margin: 139px 0;
+
+    &--logged {
+        margin: 0 0 139px 0;
+    }
 
     & figure {
         flex: 1;
