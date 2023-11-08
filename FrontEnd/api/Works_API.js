@@ -1,5 +1,5 @@
-import { createPicture } from "../components/Picture.js";
-import { CloseModal } from "../components/modal/ModalEvent.js";
+import { createCard } from "../components/createWork.js";
+import { modalEvent } from "../components/modal/Modal.js";
 
 export const All_data = async () => {
     const categories_url = "http://localhost:5678/api/categories";
@@ -10,11 +10,10 @@ export const All_data = async () => {
     try {
         const responseCategories = await fetch(categories_url);
         categoriesData = await responseCategories.json();
-        // console.log("Catégories :", categoriesData);
 
         const responseWorks = await fetch(works_url);
         worksData = await responseWorks.json();
-        // console.log("Travaux :", worksData);
+
     } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données :", error);
     }
@@ -32,9 +31,9 @@ export const Refresh_Data = async () => {
         const modal_gallery = document.querySelector(".modal__gallery");
         modal_gallery.innerHTML = "";
         refresh_data.worksData.forEach((work) => {
-            const figure = createPicture(work, false);
+            const figure = createCard(work, false);
             gallery.appendChild(figure);
-            const figure_modal = createPicture(work, true);
+            const figure_modal = createCard(work, true);
             modal_gallery.appendChild(figure_modal);
         });
     }
@@ -42,11 +41,12 @@ export const Refresh_Data = async () => {
 
 export const Create_data = async (form_data) => {
     const works_url = "http://localhost:5678/api/works";
+    const token =localStorage.getItem("token");
     try {
         const response = await fetch(works_url, {
             method: "POST",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + token,
             },
             body: form_data,
         });
@@ -55,7 +55,7 @@ export const Create_data = async (form_data) => {
             const data = await response.json();
             console.log("data :", data);
             Refresh_Data();
-            CloseModal();
+            modalEvent.closeModal();
         } else {
             console.error("Échec de la création");
         }
