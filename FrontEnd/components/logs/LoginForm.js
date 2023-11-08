@@ -1,45 +1,61 @@
-import { Login } from "../../api/Log.js";
+import { login } from "../../api/Log.js";
+
+const login_input_email = document.querySelector('#email');
+const login_input_password = document.querySelector('#password');
+const login_form = document.querySelector('#login_form');
+const login_email_error = document.querySelector('#email_error');
 
 // Fonction pour créer le formulaire de connexion
-export const LoginForm = () => {
-    const login = document.querySelector('#login');
-    const login_input_email = document.querySelector('#email');
-    const login_input_password = document.querySelector('#password');
-    const login_form = document.querySelector('#login_form');
-    const login_email_error = document.querySelector('#email_error');
-    const login_password_error = document.querySelector('#password_error');
-
-    login_input_email.addEventListener('input', function (e) {
+export const loginForm = () => {
+    login_input_email.addEventListener('input', function () {
         const emailValue = login_input_email.value;
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-        if (!emailRegex.test(emailValue)) {
-            login_email_error.style.display = 'block';
-            login_email_error.innerText = '❌ Email incorrect';
-            login_input_email.style.boxShadow = '0 0 4px 12px rgba(255,0,0,0.5)';
-        } else {
-            login_email_error.style.display = 'block';
-            login_email_error.innerText = '✔️ Email correct';
-            login_input_email.style.boxShadow = '2px 2px 2px rgba(0,255,0,0.5)';
+        const isValid = checkFormatEmail(emailValue);
+        if (!isValid) {
+            setErrorStyle.displayError();
+        }
+        else {
+            setErrorStyle.hideError();
         }
     });
-
     login_form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (login_input_email.value === '') {
-            login_email_error.style.display = 'block';
-        } else {
-            login_email_error.style.display = 'none';
+        if (!checkFormatEmail(login_input_email.value)) {
+            return;
         }
-        if (login_input_password.value === '') {
-            login_password_error.style.display = 'block';
-        } else {
-            login_password_error.style.display = 'none';
-        }
-
-        Login();
+        handleSubmit(e);
         console.log("Connexion");
     });
-    
-    return login;
 };
+
+function checkFormatEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let isValid = emailRegex.test(email);
+    
+    return isValid;
+};
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const emailValue = login_input_email.value; // sophie.bluel@test.tld
+    const passwordValue = login_input_password.value; // S0phie
+    const data = {
+        email: emailValue,
+        password: passwordValue
+    };
+    // Vérifiez à nouveau si tous les champs sont remplis
+    if (emailValue && passwordValue) {
+        login(data);
+    }
+};
+
+const setErrorStyle = {
+    displayError: () => {
+        login_input_email.classList.add('login__input--error');
+        login_email_error.classList.add('login__error--display');
+    },
+    hideError: () => {
+        login_input_email.classList.remove('login__input--error');
+        login_email_error.classList.remove('login__error--display');
+    }
+};
+loginForm();

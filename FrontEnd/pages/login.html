@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <meta name="description" content="page de connection">
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="../assets/sass/index.css">
@@ -37,10 +36,11 @@
                 <form id="login_form" class="login__form">
                     <label for="email" class="login__label">E-mail</label>
                     <input type="email" name="email" id="email" class="login__input">
-                    <p id="email_error" class="login__error">❌ Email incorrect</p>
+                    <span id="email_error" class="login__error login__error-email">❌ email non valide</span>
                     <label for="password" class="login__label">Mot de passe</label>
-                    <input type="password" name="password" id="password" class="login__input">
-                    <p id="password_error" class="login__error">❌ Mot de passe incorrect</p>
+                    <input type="password" name="password" id="password" class="login__input">                    
+                    <span id="password_error" class="login__error login__error-password">❌ Mot de passe incorrect</span>
+                    <span id="login_error" class="login__error login__error-password"></span>
                     <input id="login_submit" type="submit" class="login__btn" value="Se connecter">
                 </form>
                 <a href="#" class="login__link">Mot de passe oublié ?</a>
@@ -54,7 +54,8 @@
             </ul>
         </nav>
     </footer>
-    <script type="module" src="./Login.js" defer></script>
+    <script type="module" src="../components/logs/LoginForm.js" defer></script>
+    <script type="module" src="../components/Navbar.js"></script>
 </body>
 
 </html>
