@@ -1,7 +1,12 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
+	align-items: center;
+	padding: 50px 0;
+
+	&--logged {
+		padding: 38px 0 92px 0;
+	}
 
 	&__logo-title {
 		@include flex(column, center, flex-start);
