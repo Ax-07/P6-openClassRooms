@@ -16,13 +16,12 @@ const setFilterCategories = (categories) => {
     return filter_categories;
 };
 
-
 const createFilterList = () => {
     const filter__list = document.createElement('ul');
     filter__list.classList.add('filter__list');
     filter.appendChild(filter__list);
     return filter__list;
-}
+};
 const createFilterItem = (category) => {
     const filter__item = document.createElement('li');
     filter__item.classList.add('filter__item', `filter__item--${category.replace(/[&\s]/g, "")}`);
@@ -46,33 +45,30 @@ const createFilterLabel = (category) => {
     filter_label.htmlFor = category;
     filter_label.appendChild(filter_label_text);
     return filter_label;
-}
-
-const setActiveFilter = ( filter_categories, selectedFilter ) => {
+};
+const setActiveFilter = (filter_categories, selectedFilter) => {
     filter_categories.forEach((category) => {
         const item = document.querySelector(`.filter__item--${category.replace(/[&\s]/g, "")}`);
         const label_text = item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément
         item.classList.remove('active');
         label_text.classList.remove('active');
-    }); 
+    });
     const filter__item = document.querySelector(`.filter__item--${selectedFilter.replace(/[&\s]/g, "")}`);
     filter__item.classList.add('active');
     const label_text = filter__item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément   
     label_text.classList.add('active');
 };
 
-
-
 export const Filter = async (works, categories) => {
     if (!works) {
         return;
     }
-    const filter_categories = setFilterCategories(categories);
     if (user) {
         filter.style.display = 'none';
         section_title.style.marginBottom = '92px';
     }
-
+    
+    const filter_categories = setFilterCategories(categories);
     const filter__list = createFilterList();
 
     filter_categories.forEach((category) => {
