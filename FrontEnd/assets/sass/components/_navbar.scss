@@ -1,11 +1,20 @@
 .navbar {
-    &__list {}
+    &__list {
+        @include flex(row, flex-start, center);
+        gap: 44px;
+        
+    }
     &__item {
+        // padding: 0 10px;
+        font-size: 1.2em;
         cursor: pointer;
     }
     &__link {
         &--active {
             font-weight: bold;
         }
+    }
+    &__icon {
+        width: 22px;
     }
 }
