@@ -1,7 +1,38 @@
-import { Logout } from '../api/Log.js'
+import { logout } from '../api/Log.js';
 
-export const Navbar = () => {
-    const user = localStorage.getItem('token');
+const user = localStorage.getItem('token');
+export const initLogoutLink = () => {
+    if (user) {
+        const log_link = document.querySelector('.navbar__item--log');
+        log_link.innerText = 'Logout';
+        log_link.href = '#';
+        log_link.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    } 
+}
+initLogoutLink();
+
+export const setActiveLink = () => {
+    const nav_list_items_link = document.querySelectorAll('.navbar__link');
+
+    nav_list_items_link.forEach((link) => {
+        if (link.href === window.location.href) {
+            link.classList.add('navbar__link--active');
+        }
+
+        link.addEventListener('click', () => {
+            nav_list_items_link.forEach((item) => {
+                item.classList.remove('navbar__link--active');
+            });
+            link.classList.add('navbar__link--active');
+        });
+    });
+}
+setActiveLink();
+
+export const Navbar = (user) => {
 
     if (user) {
         const log_link = document.querySelector('.navbar__item--log');
@@ -9,25 +40,23 @@ export const Navbar = () => {
         log_link.href = '#';
         log_link.addEventListener('click', (e) => {
             e.preventDefault();
-            Logout();
+            logout();
         });
     }
 
     const nav_list_items_link = document.querySelectorAll('.navbar__link');
-    console.log('nav_list_items_link:', nav_list_items_link);
+
     nav_list_items_link.forEach((link) => {
         if (link.href === window.location.href) {
             link.classList.add('navbar__link--active');
-            console.log('link.href origin:', link.href);
         }
-        link.addEventListener('click', (e) => {
+
+        link.addEventListener('click', () => {
             nav_list_items_link.forEach((item) => {
                 item.classList.remove('navbar__link--active');
             });
-
-            console.log('link.href:', link.href);
-            console.log('window.location.href:', window.location.href);
             link.classList.add('navbar__link--active');
         });
     });
 };
+Navbar();

@@ -1,22 +1,21 @@
-import { CustomSelectUI} from '../CustomSelect.js';
+import { selectCategory} from '../CustomSelect.js';
 import { AddPicture } from '../AddPicture.js';
-import { Create_data } from '../../api/Works_API.js';
+import { createData } from '../../api/Works_API.js';
+import { user } from '../../api/store.js';
 
-export const AddWorkFormUI = (categories) => {
-
+export const addWorkForm = (categories) => {
     const add_work = document.querySelector('.add-work');
     const add_work_input_title = document.querySelector('.add-work__input--title');
     const add_work_submit_button = document.querySelector('.add-work__submit-button');
 
     const {add_picture_input } = AddPicture();
-    const {add_work_select_category} = CustomSelectUI(categories, checkFields);
-
+    const category = selectCategory(categories, checkFields);
     add_picture_input.addEventListener('input', checkFields);
     add_work_input_title.addEventListener('input', checkFields);
 
 function checkFields() {
     const titleValue = add_work_input_title.value; console.log('titleValue:', titleValue);
-    const categoryValue = add_work_select_category.value; console.log('categoryValue:', categoryValue);
+    const categoryValue = category.value; console.log('categoryValue:', categoryValue);
     const pictureValue = add_picture_input.files[0]; console.log('pictureValue:', pictureValue);
 
     // Vérifiez si tous les champs sont remplis
@@ -29,19 +28,20 @@ function checkFields() {
 
 add_work.addEventListener('submit', (e) => {
     e.preventDefault();
+    console.log('add_work submit');
 
-    const userId = localStorage.getItem('userId');
-    const titleValue = add_work_input_title.value;
-    const categoryValue = add_work_select_category.value;
-    const pictureValue = add_picture_input.files[0];
+    const titleValue = add_work_input_title.value; console.log('titleValue:', titleValue);
+    const categoryValue = category.value; console.log('categoryValue:', categoryValue);
+    const pictureValue = add_picture_input.files[0]; console.log('pictureValue:', pictureValue);
     // Vérifiez à nouveau si tous les champs sont remplis
-    if (userId && titleValue && categoryValue && pictureValue) {
+    if (user.isConnected && titleValue && categoryValue && pictureValue) {
+        console.log('Tous les champs sont remplis');
         const form_data = new FormData();
         form_data.append('title', titleValue);
         form_data.append('category', categoryValue);
         form_data.append('image', pictureValue);
 
-        const data = Create_data(form_data);
+        const data = createData(form_data);
         console.log('data:', data);
     }
 });

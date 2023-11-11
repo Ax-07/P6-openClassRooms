@@ -1,6 +1,5 @@
-import { Delete_data } from "../api/Works_API.js";
-
-const user = localStorage.getItem('token');
+import { deleteData } from "../api/Works_API.js";
+import { user } from "../api/store.js";
 
 const createCardContainer = () => {
     const card = document.createElement('figure');
@@ -30,7 +29,7 @@ const createDeleteBtn = (work) => {
             e.preventDefault();
             e.stopImmediatePropagation();
             console.log("delete btn :", work.id);
-            Delete_data(work.id);
+            deleteData(work.id);
         });
         return delete_btn;
 }
@@ -43,7 +42,7 @@ export const createCard = (work, isInModal) => {
     card.appendChild(work_card_img);
     card.appendChild(card_title);
     
-    if (isInModal && user.isConnect) {
+    if (isInModal && user.isConnected) {
         const delete_btn = createDeleteBtn(work);
         card.appendChild(delete_btn);
     }

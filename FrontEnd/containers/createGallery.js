@@ -1,12 +1,13 @@
 import { createCard } from "../components/createWork.js";
-import { All_data } from "../api/Works_API.js";
+import { works } from "../api/store.js";
 
 const gallery = document.querySelector('.gallery');
+const modalGallery = document.querySelector('.modal__gallery');
 
-
-const filterWorks = (works, selectedFilter) => {
+const setFilteredWorks = (works, selectedFilter) => {
     return selectedFilter === "Tous" ? works : works.filter(work => work.category.name === selectedFilter);
 }
+
 const createGalleryContent = (gallery, filteredWorks, isInModal) => {
     gallery.innerHTML = '';
     filteredWorks.forEach(work => {
@@ -16,22 +17,41 @@ const createGalleryContent = (gallery, filteredWorks, isInModal) => {
 }
 
 export const createGallery = async (selectedFilter) => {
-    const datas = await All_data();
-    const works = datas.worksData;
-    // const works = store()?.works; console.log("works :", works);
-    const updateGallery = () => {
-        const filteredWorks = filterWorks(works, selectedFilter);
+    console.log("createGallery utiliser");
+        const filteredWorks = setFilteredWorks(works, selectedFilter);
         createGalleryContent(gallery, filteredWorks, false);
-    };
-    updateGallery();
-
     return gallery;
 };
 
 export const createGalleryModal = (works, modalGallery) => {
-    console.log("works :", works);
     works.forEach(work => {
         const modalCard = createCard(work, true);
         modalGallery.appendChild(modalCard);
     });
 };
+
+export const createGal = () => {
+    gallery.innerHTML = '';
+    modalGallery.innerHTML = '';
+    console.log("createGal utiliser");
+    console.log("works :", works);
+    if (works) {
+    works.forEach(work => {
+        const card = createCard(work, false);
+        const modalCard = createCard(work, true);
+
+        gallery.appendChild(card);
+        modalGallery.appendChild(modalCard);
+    });
+}
+}
+
+export const filteredGal = (selectedFilter) => {
+    const filteredWorks = setFilteredWorks(works, selectedFilter);
+    gallery.innerHTML = '';
+    console.log("filteredGal utiliser");
+    filteredWorks.forEach(work => {
+        const card = createCard(work, false);
+        gallery.appendChild(card);
+    });
+}

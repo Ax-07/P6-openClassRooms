@@ -1,11 +1,12 @@
-import { createGallery } from "../containers/createGallery.js";
+import { filteredGal } from "../containers/createGallery.js";
+import { user, works, categories } from "../api/store.js";
 
 const filter = document.querySelector('.filter');
+const filter_list = document.querySelector('.filter__list');
 const section_title = document.querySelector('#portfolio h2');
-const user = localStorage.getItem('token');
 let selectedFilter = "Tous";
 
-const setFilterCategories = (categories) => {
+const initFilterCategories = (categories) => {
     let filter_categories = new Set(["Tous"]);
     categories.forEach((category) => {
         if (category.name) {
@@ -14,13 +15,6 @@ const setFilterCategories = (categories) => {
     });
     console.log("filter_categories :", filter_categories);
     return filter_categories;
-};
-
-const createFilterList = () => {
-    const filter__list = document.createElement('ul');
-    filter__list.classList.add('filter__list');
-    filter.appendChild(filter__list);
-    return filter__list;
 };
 const createFilterItem = (category) => {
     const filter__item = document.createElement('li');
@@ -59,17 +53,16 @@ const setActiveFilter = (filter_categories, selectedFilter) => {
     label_text.classList.add('active');
 };
 
-export const Filter = async (works, categories) => {
+export const createFilterElement = () => {
     if (!works) {
         return;
     }
-    if (user) {
+    if (user.isConnected) {
         filter.style.display = 'none';
         section_title.style.marginBottom = '92px';
     }
     
-    const filter_categories = setFilterCategories(categories);
-    const filter__list = createFilterList();
+    const filter_categories = initFilterCategories(categories);
 
     filter_categories.forEach((category) => {
         const filter__item = createFilterItem(category);
@@ -78,16 +71,17 @@ export const Filter = async (works, categories) => {
 
         filter_input.addEventListener('click', () => {
             setActiveFilter(filter_categories, category);
-
             selectedFilter = filter_input.value;
-            console.log('Filtre sélectionné :', selectedFilter);
-            createGallery(selectedFilter);
+            // createGallery(selectedFilter);
+            filteredGal(selectedFilter);
         });
 
         filter__item.appendChild(filter_input);
         filter__item.appendChild(filter_label);
-        filter__list.appendChild(filter__item);
+        filter_list.appendChild(filter__item);
     });
+    console.log("selectedFilter :", selectedFilter);
+    console.log("filter_categories :", filter_categories);
 
     return { selectedFilter, filter_categories };
 }
