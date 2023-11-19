@@ -5,7 +5,7 @@ import { createFilterElement } from './components/Filter.js';
 import { Edit_modal } from './components/Edit_modal.js';
 import { Modal } from "./components/ModalViewController.js";
 import { Navbar } from './components/Navbar.js';
-import { setLoggedStyles } from './utils/Styles.js';
+import { setLoggedStyles } from './utils/loggedStyles.js';
 
 const initApp = () => {
     console.log("Initialisation de l'application...");
@@ -15,7 +15,7 @@ const initApp = () => {
                 if (success) {
                     createGallery();
                     Navbar(user.isConnected);
-                    
+
                     if (user.isConnected) {
                         setLoggedStyles();
                         Edit_modal();
