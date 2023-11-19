@@ -1,10 +1,8 @@
-export const AddPicture = () => {
-    const add_picture_container = document.createElement('div');
-    add_picture_container.classList.add('add-picture__container');
+const add_picture_wrapper = document.querySelector('.add-picture__wrapper');
+const add_picture_input = document.querySelector('.add-picture__input');
+const add_picture_preview = document.querySelector('.add-picture__preview');
 
-    const add_picture_wrapper = document.querySelector('.add-picture__wrapper');
-    const add_picture_input = document.querySelector('.add-picture__input');
-    const add_picture_preview = document.querySelector('.add-picture__preview');
+export const AddPicture = () => {
 
     add_picture_input.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -20,6 +18,5 @@ export const AddPicture = () => {
         }
     });
 
-
-    return {add_picture_container, add_picture_input};
+    return add_picture_input;
 }
