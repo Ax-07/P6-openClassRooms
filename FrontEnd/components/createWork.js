@@ -1,5 +1,6 @@
-import { deleteData } from "../api/Works_API.js";
-import { user } from "../api/store.js";
+import { deleteData } from "../services/api/worksApi.js";
+import { deleteWorkFromStore, user } from "../services/store.js";
+import { createGallery } from "./createGallery.js";
 
 const createCardContainer = () => {
     const card = document.createElement('figure');
@@ -20,18 +21,22 @@ const createCardTitle = (work) => {
     return card_title;
 };
 
+const deleteWork = (id) => {
+    deleteData(id, user.token);
+    deleteWorkFromStore(id);
+}
 
 const createDeleteBtn = (work) => {
     const delete_btn = document.createElement('span');
-        delete_btn.classList.add('delete__btn');
+    delete_btn.classList.add('delete__btn');
 
-        delete_btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            console.log("delete btn :", work.id);
-            deleteData(work.id);
-        });
-        return delete_btn;
+    delete_btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        deleteWork(work.id);
+        createGallery();
+
+    });
+    return delete_btn;
 }
 
 export const createCard = (work, isInModal) => {
@@ -41,7 +46,7 @@ export const createCard = (work, isInModal) => {
 
     card.appendChild(work_card_img);
     card.appendChild(card_title);
-    
+
     if (isInModal && user.isConnected) {
         const delete_btn = createDeleteBtn(work);
         card.appendChild(delete_btn);
