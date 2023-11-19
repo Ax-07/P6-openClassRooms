@@ -1,11 +1,11 @@
-import { filteredGal } from "../containers/createGallery.js";
-import { user, works, categories } from "../api/store.js";
+import { filteredGallery } from "../components/createGallery.js";
+import { user, works, categories } from "../services/store.js";
 
 const filter = document.querySelector('.filter');
 const filter_list = document.querySelector('.filter__list');
 const section_title = document.querySelector('#portfolio h2');
-let selectedFilter = "Tous";
 
+let selectedFilter = "Tous";
 const initFilterCategories = (categories) => {
     let filter_categories = new Set(["Tous"]);
     categories.forEach((category) => {
@@ -15,6 +15,18 @@ const initFilterCategories = (categories) => {
     });
     console.log("filter_categories :", filter_categories);
     return filter_categories;
+};
+const setActiveFilter = (filter_categories, selectedFilter) => {
+    filter_categories.forEach((category) => {
+        const item = document.querySelector(`.filter__item--${category.replace(/[&\s]/g, "")}`);
+        const label_text = item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément
+        item.classList.remove('active');
+        label_text.classList.remove('active');
+    });
+    const filter__item = document.querySelector(`.filter__item--${selectedFilter.replace(/[&\s]/g, "")}`);
+    filter__item.classList.add('active');
+    const label_text = filter__item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément   
+    label_text.classList.add('active');
 };
 const createFilterItem = (category) => {
     const filter__item = document.createElement('li');
@@ -40,19 +52,6 @@ const createFilterLabel = (category) => {
     filter_label.appendChild(filter_label_text);
     return filter_label;
 };
-const setActiveFilter = (filter_categories, selectedFilter) => {
-    filter_categories.forEach((category) => {
-        const item = document.querySelector(`.filter__item--${category.replace(/[&\s]/g, "")}`);
-        const label_text = item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément
-        item.classList.remove('active');
-        label_text.classList.remove('active');
-    });
-    const filter__item = document.querySelector(`.filter__item--${selectedFilter.replace(/[&\s]/g, "")}`);
-    filter__item.classList.add('active');
-    const label_text = filter__item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément   
-    label_text.classList.add('active');
-};
-
 export const createFilterElement = () => {
     if (!works) {
         return;
@@ -73,7 +72,7 @@ export const createFilterElement = () => {
             setActiveFilter(filter_categories, category);
             selectedFilter = filter_input.value;
             // createGallery(selectedFilter);
-            filteredGal(selectedFilter);
+            filteredGallery(selectedFilter);
         });
 
         filter__item.appendChild(filter_input);
@@ -81,7 +80,6 @@ export const createFilterElement = () => {
         filter_list.appendChild(filter__item);
     });
     console.log("selectedFilter :", selectedFilter);
-    console.log("filter_categories :", filter_categories);
 
     return { selectedFilter, filter_categories };
 }
