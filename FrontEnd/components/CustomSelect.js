@@ -1,4 +1,3 @@
-
 let isOpen = false;
 let category = null;
 
@@ -21,7 +20,8 @@ const displaySelectorValue = (category) => {
     custom_select_value.innerText = category.name;
 }
 
-export const selectCategory = (categories, checkFields) => {
+// utilisation d'une fonction callback "selectedCategory" pour definir la category sinon selectCatgory renvoie null.
+export const selectCategory = (categories, checkFields, selectedCategory) => {
     console.log('custom categories:', categories);
     custom_select.addEventListener('click', () => {
         if (isOpen) {
@@ -36,11 +36,11 @@ export const selectCategory = (categories, checkFields) => {
             customSelectItem.addEventListener('click', () => {
               category = categories[index]; console.log('custom category:', category);
                 displaySelectorValue(category);
+                selectedCategory(category);
                 checkFields();
-                
             });
     });
     console.log('custom select category:', category);
 
-    return add_work_select_category;
+    return category;
 }
