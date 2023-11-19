@@ -1,20 +1,37 @@
-import { All_data } from './api/Works_API.js';
-import { Gallery_page } from './containers/Gallery.js';
-import { Filter } from './components/Filter.js';
-import { Edit_modal } from './components/modal/Edit_modal.js';
-import { Modal} from "./components/modal/Modal.js";
+import { initStore, user } from './services/store.js';
+import { getAllData } from './services/api/worksApi.js';
+import { createGallery } from './components/createGallery.js';
+import { createFilterElement } from './components/Filter.js';
+import { Edit_modal } from './components/Edit_modal.js';
+import { Modal } from "./components/ModalViewController.js";
 import { Navbar } from './components/Navbar.js';
+import { setLoggedStyles } from './utils/Styles.js';
 
-const App = async () => {
-    const datas = await All_data();
-    const works = datas.worksData;
-    const {selectedFilter, filter_categories} = await Filter(works);
-    console.log("selectedFilter app :", selectedFilter);
-    console.log("filter_categories app :", filter_categories);
-    Navbar();
-    Edit_modal();
-    Gallery_page(works, selectedFilter);
-    Modal(works, filter_categories);
-
+const initApp = () => {
+    console.log("Initialisation de l'application...");
+    getAllData().then((data) => {
+        initStore(data)
+            .then((success) => {
+                if (success) {
+                    createGallery();
+                    Navbar(user.isConnected);
+                    
+                    if (user.isConnected) {
+                        setLoggedStyles();
+                        Edit_modal();
+                        Modal();
+                    }
+                    else {
+                        createFilterElement();
+                    }
+                } else {
+                    console.error("Erreur lors de l'initialisation du store.");
+                }
+            })
+            .catch((error) => {
+                console.error("Une erreur s'est produite lors de l'initialisation de l'application :", error);
+            });
+    })
 }
-window.onload = App;
+
+initApp();
