@@ -1,4 +1,4 @@
-import { logout } from '../api/Log.js';
+import { logout } from '../services/api/logsApi.js';
 
 const user = localStorage.getItem('token');
 export const initLogoutLink = () => {
