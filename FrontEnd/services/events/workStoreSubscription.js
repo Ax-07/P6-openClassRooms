@@ -1,7 +1,7 @@
 import { worksBus } from "../eventBus.js";
 import { storeWorks } from "../../models/workStore.js";
 import { gallery } from "../../components/gallery.js";
-import { filter } from "../../components/filter.js";
+import { filter } from "../../components/Filter.js";
 
 export const subscribeToWorkStore = () => {
     console.log('subscribeToWorkStore executé');
