@@ -2,14 +2,12 @@ import { selectCategory } from './CustomSelect.js';
 import { AddPicture } from './AddPicture.js';
 import { createData } from '../services/api/worksApi.js';
 import { addNewWorkToStore, user } from '../services/store.js';
-import { createGallery } from './createGallery.js';
 import { modalEvent } from './ModalViewController.js';
 import { categories } from '../services/store.js';
 
 const add_work = document.querySelector('.add-work');
 const add_work_input_title = document.querySelector('.add-work__input--title');
 const add_work_submit_button = document.querySelector('.add-work__submit-button');
-
 
 export const addWorkForm = () => {
     let selectedCategory = null;
@@ -35,14 +33,22 @@ export const addWorkForm = () => {
             add_work_submit_button.disabled = true; // Désactiver le bouton si un champ n'est pas rempli
         }
     }
+    function resetForm() {
+        add_work_input_title.value = '';
+        add_picture_input.value = '';
+        selectedCategory = null;
+        // Réinitialiser d'autres états si nécessaire
 
+        // Désactiver le bouton de soumission après la réinitialisation
+        add_work_submit_button.disabled = true;
+    }
     add_work.addEventListener('submit', (e) => {
         e.preventDefault();
         console.log('add_work submit');
 
-        const titleValue = add_work_input_title.value; console.log('titleValue:', titleValue);
-        const categoryValue = category.id; console.log('categoryValue:', categoryValue);
-        const pictureValue = add_picture_input.files[0]; console.log('pictureValue:', pictureValue);
+        let titleValue = add_work_input_title.value; console.log('titleValue:', titleValue);
+        let categoryValue = selectedCategory ? selectedCategory.id : null; console.log('categoryValue:', categoryValue);
+        let pictureValue = add_picture_input.files[0]; console.log('pictureValue:', pictureValue);
         // Vérifiez à nouveau si tous les champs sont remplis
         if (user.isConnected && titleValue && categoryValue && pictureValue) {
             console.log('Tous les champs sont remplis');
@@ -51,12 +57,13 @@ export const addWorkForm = () => {
             form_data.append('category', categoryValue);
             form_data.append('image', pictureValue);
 
-            createData(form_data)
+            createData(form_data, user.token)
             .then((data) => {
                 addNewWorkToStore(data);
-                createGallery();
                 modalEvent.closeModal();
                 console.log('ajout reussi')
+                resetForm();
+                workStore.dispatch('workAdded', data);
             })
             .catch((error) => {
                 console.log(error);
