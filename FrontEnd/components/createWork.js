@@ -1,6 +1,6 @@
 import { deleteData } from "../services/api/worksApi.js";
+import { worksBus } from "../services/eventBus.js";
 import { deleteWorkFromStore, user } from "../services/store.js";
-import { createGallery } from "./createGallery.js";
 
 const createCardContainer = () => {
     const card = document.createElement('figure');
@@ -21,8 +21,10 @@ const createCardTitle = (work) => {
     return card_title;
 };
 
-const deleteWork = (id) => {
-    deleteData(id, user.token);
+const deleteWork = (id, token) => {
+    console.log('deleteWork id:', id);
+    console.log('deleteWork token:', token);
+    deleteData(id, token);
     deleteWorkFromStore(id);
 }
 
@@ -32,8 +34,9 @@ const createDeleteBtn = (work) => {
 
     delete_btn.addEventListener('click', (e) => {
         e.preventDefault();
-        deleteWork(work.id);
-        createGallery();
+        worksBus.emit('workDeleted', work);
+        deleteWork(work.id, user.token);
+        workStore.dispatch('workDeleted', work);
 
     });
     return delete_btn;

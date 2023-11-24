@@ -1,11 +1,6 @@
-const login_url = "http://localhost:5678/api/users/login";
+import { userBus } from "../eventBus.js";
 
-function removeUserToken() {
-    localStorage.removeItem("token");
-}
-function redirectHome() {
-    window.location.href = "../index.html";
-}
+const login_url = "http://localhost:5678/api/users/login";
 
 // Fonction pour envoyer les données de connexion au serveur
 export const login = async (formData) => {
@@ -27,9 +22,7 @@ export const login = async (formData) => {
 
 export const logout = () => {
     try {
-        removeUserToken();
-        redirectHome();
-        console.log("Déconnexion réussie !");
+        userBus.emit("logout");
     } catch (error) {
         console.error("Erreur inattendue : ", error);
     }
