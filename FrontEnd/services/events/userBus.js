@@ -76,6 +76,7 @@ export const userBus_Subscription = () => {
 
     userBus.subscribe("logout", () => {
         user.removeToken();
+        window.location.href = "#";
         console.log("Déconnexion réussie !");
     });
 };
