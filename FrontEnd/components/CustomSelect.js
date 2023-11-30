@@ -1,46 +1,63 @@
-let isOpen = false;
-let category = null;
+import { workFormBus } from "../services/eventBus.js";
 
-const add_work_select_category = document.querySelector('.custom-select > select');
-const custom_select = document.querySelector('.custom-select');
-const custom_select_value = document.querySelector('.custom-select__value');
-const custom_select_list = document.querySelector('.custom-select__list');
-const custom_select_items = document.querySelectorAll('.custom-select__item');
+export class CustomSelect {
+    constructor() {
+        this.selectedCategory = null;
+        this.isOpen = false;
+        this.customSelect = document.querySelector('.custom-select');
+        this.customSelectValue = document.querySelector('.custom-select__value');
+        this.customSelectList = document.querySelector('.custom-select__list');
+        this.customSelectItems = document.querySelectorAll('.custom-select__item');
+        this.addWorkSelectCategory = document.querySelector('.custom-select > select');
+    }
 
-const openSelector = () => {
-    custom_select.classList.add('opened');
-    custom_select_list.classList.add('display');
-};
-const closeSelector = () => {
-    custom_select.classList.remove('opened');
-    custom_select_list.classList.remove('display');
-};
-const displaySelectorValue = (category) => {
-    add_work_select_category.value = category.id;
-    custom_select_value.innerText = category.name;
-}
+    openSelector() {
+        this.customSelect.classList.add('opened');
+        this.customSelectList.classList.add('display');
+    }
 
-// utilisation d'une fonction callback "selectedCategory" pour definir la category sinon selectCatgory renvoie null.
-export const selectCategory = (categories, checkFields, selectedCategory) => {
-    console.log('custom categories:', categories);
-    custom_select.addEventListener('click', () => {
-        if (isOpen) {
-            closeSelector();
-        } else {
-            openSelector();
-        }
-        isOpen = !isOpen;
-    });
-    
-    custom_select_items.forEach((customSelectItem, index) => {
+    closeSelector() {
+        this.customSelect.classList.remove('opened');
+        this.customSelectList.classList.remove('display');
+    }
+
+    displaySelectorValue(category) {
+        console.log('displaySelectorValue category:', category);
+        // this.addWorkSelectCategory.value = category.value;
+        this.customSelectValue.innerText = category.name;
+    }
+
+    resetSelectedCategory() {
+        this.selectedCategory = 'selectionner une categorie';
+        // this.displaySelectorValue(this.selectedCategory);
+        this.customSelectValue.innerText = 'Choisissez une catégorie';
+        console.log('resetSelectedCategory:', this.selectedCategory);
+    }
+
+    init(categories) {
+        this.categories = categories;
+        this.customSelect.addEventListener('click', () => {
+            if (this.isOpen) {
+                this.closeSelector();
+            } else {
+                this.openSelector();
+            }
+            this.isOpen = !this.isOpen;
+        });
+
+        this.customSelectItems.forEach((customSelectItem, index) => {
             customSelectItem.addEventListener('click', () => {
-              category = categories[index]; console.log('custom category:', category);
-                displaySelectorValue(category);
-                selectedCategory(category);
-                checkFields();
+                this.selectedCategory = this.categories[index];
+                this.displaySelectorValue(this.selectedCategory);
+                workFormBus.emit('workForm:categorySelected', this.selectedCategory);
             });
-    });
-    console.log('custom select category:', category);
+        });
+    }
 
-    return category;
-}
+    getSelectedCategory() {
+        return this.selectedCategory;
+    }
+} 
+
+export const customSelect = new CustomSelect();
+console.log('customSelect:', customSelect);

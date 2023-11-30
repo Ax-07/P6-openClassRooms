@@ -1,22 +1,52 @@
-const add_picture_wrapper = document.querySelector('.add-picture__wrapper');
-const add_picture_input = document.querySelector('.add-picture__input');
-const add_picture_preview = document.querySelector('.add-picture__preview');
+import { workFormBus } from "../services/eventBus.js";
 
-export const AddPicture = () => {
+class AddPicture {
+    constructor() {
+        this._file = null;
+        this.add_picture_wrapper = document.querySelector('.add-picture__wrapper');
+        this.add_picture_input = document.querySelector('.add-picture__input');
+        this.add_picture_preview = document.querySelector('.add-picture__preview');
 
-    add_picture_input.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
+    }
+
+    displayPreviewPicture() {
+        this.add_picture_preview.style.display = 'block';
+        this.add_picture_wrapper.style.display = 'none';
+    }
+
+    hidePreviewPicture() {
+        this.add_picture_preview.style.display = 'none';
+        this.add_picture_wrapper.style.display = 'flex';
+    }
+
+    setPreviewPicture(reader) {
+        this.add_picture_preview.setAttribute('src', reader.result);
+    }
+
+    resetPicture() {
+        this.hidePreviewPicture();
+        this._file = null;
+    }
+
+    handleInputChange(e) {
+        this._file = e.target.files[0];
+        if (this._file) {
             const reader = new FileReader();
-            add_picture_preview.style.display = 'block';
             reader.addEventListener('load', () => {
-                add_picture_preview.setAttribute('src', reader.result);
+                this.add_picture_preview.setAttribute('src', reader.result);
             });
-            reader.readAsDataURL(file);
-            add_picture_preview.style.display = 'block';
-            add_picture_wrapper.style.display = 'none';
+            reader.readAsDataURL(this._file);
+            this.displayPreviewPicture();
+            workFormBus.emit('workForm:pictureAdded', this._file);
         }
-    });
+    }
 
-    return add_picture_input;
+    init() {
+        console.log('Initializing AddPicture...');
+        this.add_picture_input.addEventListener('change', this.handleInputChange.bind(this));
+
+        // Additional initialization logic can be added here.
+    }
 }
+
+export const addPicture = new AddPicture();
