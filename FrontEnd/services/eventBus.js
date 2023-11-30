@@ -29,5 +29,6 @@ export class EventBus {
 // On crée une instance de EventBus et on l'exporte pour qu'elle puisse être utilisée dans d'autres fichiers
 const userBus = new EventBus();
 const worksBus = new EventBus();
+const workFormBus = new EventBus();
 
-export { userBus, worksBus };
+export { userBus, worksBus, workFormBus };
