@@ -1,5 +1,3 @@
-import { addWorkForm } from './AddWorkForm.js';
-
 const body = document.querySelector('body');
 const modal_background = document.querySelector('.modal__background');
 const modal = document.querySelector('.modal');
@@ -53,10 +51,6 @@ export const Modal = () => {
     modal_btn_addWork.addEventListener('click', () => {
         modalEvent.displayAddWorkForm();
     });
-
-    const add_work = addWorkForm();
-
-    modal_add_work.appendChild(add_work);
 
     body.appendChild(modal_background);
     body.appendChild(modal);
