@@ -1,52 +1,52 @@
-import { displayLoginError, loginError } from "../errors/loginErrors.js";
+import { loginError } from "../errors/loginErrors.js";
 import { login } from "../services/api/logsApi.js";
 import { userBus } from "../services/eventBus.js";
-import { loginSubscription } from "../services/events/loginSubscription.js";
+import { userBus_Subscription } from "../services/events/userBus.js";
 
-const login_input_email = document.querySelector('#email');
-const login_input_password = document.querySelector('#password');
-const login_form = document.querySelector('#login_form');
+const loginForm = {
+    login_input_email: document.querySelector('#email'),
+    login_input_password: document.querySelector('#password'),
+    login_form: document.querySelector('#login_form'),
 
-loginSubscription();
+    init() {
+        userBus_Subscription();
+        this.login_input_email.addEventListener('input', this.checkEmailFormat.bind(this));
+        this.login_form.addEventListener('submit', this.onSubmit.bind(this));
+    },
 
-const loginForm = () => {
-    login_input_email.addEventListener('input', checkEmailFormat);
-    login_form.addEventListener('submit', onSubmit);
-};
+    checkEmailFormat({target: {value: email}}) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let isValid = emailRegex.test(email);
 
-function checkEmailFormat({target: {value: email}}) {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    let isValid = emailRegex.test(email);
+        if (!isValid) {
+            loginError.invalidEmail();
+        }
+        else {
+            loginError.hideError();
+        }
+    },
 
-    if (!isValid) {
-        loginError.invalidEmail();
-    }
-    else {
-        loginError.hideError();
-    }
-};
+    async onSubmit(e) {
+        e.preventDefault();
+        const emailValue = this.login_input_email.value;
+        const passwordValue = this.login_input_password.value;
 
-async function onSubmit(e) {
-    e.preventDefault();
-    const emailValue = login_input_email.value; // sophie.bluel@test.tld
-    const passwordValue = login_input_password.value; // S0phie
+        if (!emailValue || !passwordValue) {
+            return;
+        }
 
-    // Vérifie à nouveau si tous les champs sont remplis
-    if (!emailValue || !passwordValue) {
-        return;
-    }
+        const data = {
+            email: emailValue,
+            password: passwordValue
+        };
 
-    const data = {
-        email: emailValue,
-        password: passwordValue
-    };
-
-    try {
-        const response = await login(data);
-        userBus.emit("login", response);
-    } catch (error) {
-        console.error("Erreur lors de la connexion :", error);
+        try {
+            const response = await login(data);
+            userBus.emit("login", response);
+        } catch (error) {
+            console.error("Erreur lors de la connexion :", error);
+        }
     }
 }
 
-loginForm();
+loginForm.init();
