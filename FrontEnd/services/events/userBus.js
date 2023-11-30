@@ -12,7 +12,7 @@ import { addPicture } from "../../components/AddPicture.js";
 import { workForm } from "../../components/WorkForm.js";
 
 function redirectHome() {
-    window.location.href = "/index.html";
+    window.location.href = "../index.html";
 };
 
 async function onLoginSuccess(response) {
@@ -76,7 +76,6 @@ export const userBus_Subscription = () => {
 
     userBus.subscribe("logout", () => {
         user.removeToken();
-        redirectHome();
         console.log("Déconnexion réussie !");
     });
 };
