@@ -12,7 +12,7 @@ import { addPicture } from "../../components/AddPicture.js";
 import { workForm } from "../../components/WorkForm.js";
 
 function redirectHome() {
-    window.location.href = "../index.html";
+    window.location.href = "/index.html";
 };
 
 async function onLoginSuccess(response) {
