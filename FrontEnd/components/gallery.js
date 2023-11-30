@@ -1,4 +1,5 @@
 import { createCard } from "./createWork.js";
+import { WorkFigure } from "../Templates/workFigure.js";
 
 export class Gallery {
     constructor() {
@@ -19,11 +20,11 @@ export class Gallery {
         console.log('store works gallery:', this._works);
         if (this._works) {
             this._works.forEach(work => {
-                const card = createCard(work, false);
-                const modalCard = createCard(work, true);
+                const workFigure = new WorkFigure(work, false).createWorkFigure();
+                const modalWorkFigure = new WorkFigure(work, true).createWorkFigure();
     
-                this._gallery.appendChild(card);
-                this._modalGallery.appendChild(modalCard);
+                this._gallery.appendChild(workFigure);
+                this._modalGallery.appendChild(modalWorkFigure);
             });
         }
     }
