@@ -2,7 +2,6 @@ import { userBus } from "../eventBus.js";
 
 const login_url = "http://localhost:5678/api/users/login";
 
-// Fonction pour envoyer les données de connexion au serveur
 export const login = async (formData) => {
     try {
         const response = await fetch(login_url, {
