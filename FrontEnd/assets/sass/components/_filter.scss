@@ -1,6 +1,7 @@
 .filter {
     width: fit-content;
     margin: 51px auto;
+    display: none;
 
     &__list {
         @include flex(row, space-between, center);
