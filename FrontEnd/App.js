@@ -1,4 +1,5 @@
-import { user } from './services/store.js';
+// import { user } from './services/store.js';
+import { user } from './models/user.js';
 import { getAllData } from './services/api/worksApi.js';
 import { setActiveLink } from './components/Navbar.js';
 import { userBus, worksBus } from './services/eventBus.js';
