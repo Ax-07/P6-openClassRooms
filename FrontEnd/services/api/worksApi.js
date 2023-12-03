@@ -15,10 +15,10 @@ export const getAllData = async () => {
     } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données :", error);
     }
-
 };
 
 export const createData = async (form_data, userToken) => {
+    console.log('form_data:', form_data, userToken);
     try {
         const response = await fetch(worksUrl, {
             method: "POST",
