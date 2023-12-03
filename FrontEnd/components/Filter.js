@@ -4,6 +4,7 @@ class Filter {
     constructor() {
         this._filteredWorks = [];
         this._categories = [];
+        this._filter = document.querySelector('.filter');
         this._filterList = document.querySelector('.filter__list');
         this._selectedFilter = "Tous";
     }
@@ -46,6 +47,9 @@ class Filter {
         }
         console.log("setFilteredWorks :", this._filteredWorks);
         return this._filteredWorks;
+    }
+    display() {
+        this._filter.style.display = 'flex';
     }
 
     render() {

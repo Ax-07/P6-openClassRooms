@@ -70,6 +70,7 @@ export const userBus_Subscription = () => {
             editBanner.display();
             Modal();
         } else {
+            filter.display();
             filter.setCategories(storeWorks.categories);
         }
     });
