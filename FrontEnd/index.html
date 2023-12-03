@@ -16,7 +16,7 @@
 
 <body>
 	<div class="edit__banner">
-		<span class="edit__btn">Mode édition</span>
+		<span class="edit__btn edit__btn-1">Mode édition</span>
 	</div>
 	<div class="page">
 		<header class="header">	
@@ -49,7 +49,11 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="title-wrapper">
+				<h2>Mes Projets</h2>
+				<span class="edit__btn edit__btn-2">modifier</span>
+			</div>
+
 			<div class="filter">
 				<ul class="filter__list"></ul>
 			</div>
@@ -77,6 +81,7 @@
 			</ul>
 		</nav>
 	</footer>
+
 	<div class="modal__background"></div>
 	<aside class="modal" id="modal">
 		<span class="modal__btn-back"></span>
@@ -94,11 +99,12 @@
 						<p class="add-picture__txt">jpg, png : 4mo max</p>
 					</div>
 				</div>
+
 				<label for="title" class="add-work__label">Titre</label>
 				<input type="text" id="title" name="title" class="add-work__input add-work__input--title">
 				<label for="category" class="add-work__label">Catégorie</label>
 				<div class="add-work__input custom-select">
-					<p class="custom-select__value"></p>
+					<p class="custom-select__value">Choisissez une catégorie</p>
 					<ul class="custom-select__list">
 						<li class="custom-select__item">Objets</li>
 						<li class="custom-select__item">Appartements</li>
@@ -110,6 +116,7 @@
 						<option value="3">Hotels & restaurants</option>
 					</select>
 				</div>
+				
 				<input type="submit" class="add-work__btn add-work__submit-button btn-primary" disabled="true"
 					value="Ajouter">
 			</form>
