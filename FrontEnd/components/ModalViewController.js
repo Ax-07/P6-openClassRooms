@@ -17,16 +17,16 @@ export const modalEvent = {
         modal.setAttribute('style', 'display: none;');
         modal_background.setAttribute('style', 'display: none;');
         modal_btn_back.setAttribute('style', 'display: none;');
-        modal_gallery.setAttribute('style', 'display: flex;');
         modal_add_work.setAttribute('style', 'display: none;');
         modal_title.innerText = 'Galerie photo';
+        modal_gallery.setAttribute('style', 'display: flex;');
         modal_btn_addWork.setAttribute('style', 'display: block;');
     },
     displayAddWorkForm() {
         modal_btn_back.setAttribute('style', 'display: flex;');
-        modal_gallery.setAttribute('style', 'display: none;');
         modal_add_work.setAttribute('style', 'display: flex;');
         modal_title.innerText = 'Ajout photo';
+        modal_gallery.setAttribute('style', 'display: none;');
         modal_btn_addWork.setAttribute('style', 'display: none;');
     },
     backGallery() {
