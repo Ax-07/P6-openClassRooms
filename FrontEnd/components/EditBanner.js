@@ -1,21 +1,11 @@
-import { modalEvent } from "./ModalViewController.js";
-
-/**
- * @class EditBanner
- * @classdesc affiche la bannière et le boutton modifier pour afficher la modale
- * 
- * @property { HTMLElement } _edit_banner - element .edit__banner
- * @property { HTMLElement } _edit_btn - element .edit__btn
- * 
- * @method display - affiche la banière et le boutton
- */
+import { modal } from "./Modal.js";
 
 export class EditBanner {
     constructor() {
         this._edit_banner = document.querySelector('.edit__banner');
         this._edit_btn = document.querySelectorAll('.edit__btn');
         this._edit_btn.forEach(btn => {
-            btn.addEventListener('click', () => modalEvent.openModal());
+            btn.addEventListener('click', () => modal.openModal());
         });
         console.log('EditBanner executé');
     }
