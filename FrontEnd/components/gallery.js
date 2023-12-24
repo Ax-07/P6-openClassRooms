@@ -16,13 +16,19 @@ export class Gallery {
         this._gallery.innerHTML = '';
         this._modalGallery.innerHTML = '';
         if (this._works) {
+            const fragment = document.createDocumentFragment();
+            const modalFragment = document.createDocumentFragment();
+    
             this._works.forEach(work => {
                 const workFigure = new WorkFigure(work, false).createWorkFigure();
                 const modalWorkFigure = new WorkFigure(work, true).createWorkFigure();
     
-                this._gallery.appendChild(workFigure);
-                this._modalGallery.appendChild(modalWorkFigure);
+                fragment.appendChild(workFigure);
+                modalFragment.appendChild(modalWorkFigure);
             });
+    
+            this._gallery.appendChild(fragment);
+            this._modalGallery.appendChild(modalFragment);
         }
     }
 }
