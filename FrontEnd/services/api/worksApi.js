@@ -1,3 +1,5 @@
+import { workFormBus } from "../eventBus.js";
+
 const ApiUrl = "http://localhost:5678";
 const categoriesUrl = `${ApiUrl}/api/categories`;
 const worksUrl = `${ApiUrl}/api/works`;
@@ -30,10 +32,11 @@ export const createData = async (form_data, userToken) => {
 
         if (response.ok) {
             const data = await response.json();
-
+            workFormBus.emit('workForm:addWork-notification', { isSuccess: true });
             return data;
             
         } else {
+            workFormBus.emit('workForm:addWork-notification', { isSuccess: false });
             console.error("Échec de la création");
         }
     } catch (error) {
@@ -50,9 +53,11 @@ export const deleteData = async (id, userToken) => {
             },
         });
         if (response.ok) {
+            workFormBus.emit('workForm:deleteWork-notification', { isSuccess: true });
             console.log("Suppression réussie", response);
         }
         else {
+            workFormBus.emit('workForm:deleteWork-notification', { isSuccess: false });
             console.error("Échec de la suppression");
         }
     } catch (error) {

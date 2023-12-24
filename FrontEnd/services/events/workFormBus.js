@@ -1,11 +1,12 @@
 import { createData } from "../api/worksApi.js";
 import { workFormBus, worksBus } from "../eventBus.js";
-import  { storeWorks } from "../../models/workStore.js";
+import { storeWorks } from "../../models/workStore.js";
 import { user } from "../../models/user.js";
-import { modalEvent } from "../../components/ModalViewController.js";
+import { modal } from "../../components/Modal.js";
 import { addPicture } from "../../components/AddPicture.js";
 import { customSelect } from "../../components/CustomSelect.js";
 import { workForm } from "../../components/WorkForm.js";
+import { notification } from "../../components/Notification.js";
 
 const add_work_submit_button = document.querySelector('.add-work__submit-button');
 
@@ -24,13 +25,19 @@ export const workFormBus_Subscription = () => {
 
     workFormBus.subscribe('workForm:pictureAdded', (picture) => {
         console.log('workForm:picture added:', picture);
-        if (picture) {
+        if (picture.size <= 4*(1024*1024)) {
             fieldStates.pictureValid = true;
             formData.picture = picture;
             console.log('workForm:picture added:', true);
             workFormBus.emit('workForm:checkFields');
             console.log('formData:', formData);
-
+        }
+        else {
+            fieldStates.pictureValid = false;
+            formData.picture = '';
+            console.log('workForm:picture added:', false);
+            workFormBus.emit('workForm:checkFields');
+            console.log('formData:', formData);
         }
     });
 
@@ -62,7 +69,6 @@ export const workFormBus_Subscription = () => {
         console.log('workForm:form data', formData);
     });
 
-    
     workFormBus.subscribe('workForm:checkFields', () => {
         console.log('workForm:check fields');
         if (fieldStates.pictureValid && fieldStates.categoryValid && fieldStates.titleValid) {
@@ -72,28 +78,37 @@ export const workFormBus_Subscription = () => {
         }
         workFormBus.emit('workForm:formData');
     });
-    
+
     workFormBus.subscribe('workForm:createWork', (form_data) => {
         console.log('workForm:create work', form_data);
         createData(form_data, user.token)
-        .then((data) => {
-            storeWorks.addNewWorkToStore(data);
-            modalEvent.closeModal();
-            worksBus.emit('workCreated', data);
-            console.log('ajout reussi')
-        })
-        .then(() => {
-            workFormBus.emit('workForm:resetForm');
-            console.log('workForm:reset form');
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            .then((data) => {
+                storeWorks.addNewWorkToStore(data);
+                modal.closeModal();
+                worksBus.emit('workCreated', data);
+                console.log('ajout reussi')
+            })
+            .then(() => {
+                workFormBus.emit('workForm:resetForm');
+                console.log('workForm:reset form');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     });
-    
+
+    workFormBus.subscribe('workForm:addWork-notification', (response) => {
+        notification.displayAddWorkNotifications(response);
+    });
+
+    workFormBus.subscribe('workForm:deleteWork-notification', (response) => {
+        notification.displayDeleteWorkNotifications(response);
+    });
+
     workFormBus.subscribe('workForm:resetForm', () => {
         addPicture.resetPicture(); console.log('reset picture', addPicture);
-        customSelect.resetSelectedCategory(); console.log('reset category', customSelect); 
+        customSelect.resetSelectedCategory(); console.log('reset category', customSelect);
         workForm.resetForm(); console.log('reset form', workForm);
+        add_work_submit_button.disabled = true;
     });
 }
