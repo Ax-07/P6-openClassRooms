@@ -1,6 +1,6 @@
 import { workFormBus } from "../services/eventBus.js";
 
-export class CustomSelect {
+class CustomSelect {
     constructor() {
         this.selectedCategory = null;
         this.isOpen = false;
@@ -23,13 +23,11 @@ export class CustomSelect {
 
     displaySelectorValue(category) {
         console.log('displaySelectorValue category:', category);
-        // this.addWorkSelectCategory.value = category.value;
         this.customSelectValue.innerText = category.name;
     }
 
     resetSelectedCategory() {
         this.selectedCategory = 'selectionner une categorie';
-        // this.displaySelectorValue(this.selectedCategory);
         this.customSelectValue.innerText = 'Choisissez une catégorie';
         console.log('resetSelectedCategory:', this.selectedCategory);
     }
@@ -55,9 +53,9 @@ export class CustomSelect {
     }
 
     getSelectedCategory() {
+        console.log('getSelectedCategory:', this.selectedCategory);
         return this.selectedCategory;
     }
 } 
 
 export const customSelect = new CustomSelect();
-console.log('customSelect:', customSelect);
