@@ -47,5 +47,13 @@
         transform: translateX(-50%);
         height: 100%;
         object-fit: cover;
+
+        &--active {
+            display: block;
+
+            & ~.add-picture__wrapper {
+                display: none;
+            }
+        }
     }
 }
