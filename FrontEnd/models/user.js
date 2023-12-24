@@ -30,4 +30,3 @@ class User {
 }
 
 export const user = new User(); console.log('user:', user);
-const user2 = new User(); console.log('user2:', user2);

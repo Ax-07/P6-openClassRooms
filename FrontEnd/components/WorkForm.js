@@ -9,7 +9,6 @@ class WorkForm {
         this._picture = '';
         this._title = '';
         this._category = '';
-        this.form_data = new FormData();
 
         workFormBus.subscribe('workForm:setFormData', (formData) => {
             console.log('workForm:set form data', formData);
@@ -31,6 +30,7 @@ class WorkForm {
         console.log('add_work submit ', this._title, this._category, this._picture);
 
         if (this._picture && this._title && this._category) {
+            this.form_data = new FormData();
             this.form_data.append('title', this._title);
             this.form_data.append('category', this._category);
             this.form_data.append('image', this._picture);
