@@ -35,13 +35,20 @@ main {
     }
 }
 
-#portfolio {
+.portfolio {
+    display: flex;
+    flex-direction: column;
+    gap: 51px;
     margin-bottom: 57px;
     position: relative;
 
-    & h2 {
-        text-align: center;
-        // margin-bottom: 1em;
+    &--logged {
+        gap: 92px;
+    }
+
+    &__title-wrapper {
+        @include flex(row, center, center);
+        position: relative;
     }
 }
 
@@ -53,9 +60,7 @@ main {
     & h2 {
         margin-bottom: 9px;
     }
-
-    & p {}
-
+    
     & form {
         display: flex;
         flex-direction: column;

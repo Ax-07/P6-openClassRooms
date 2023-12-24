@@ -53,12 +53,22 @@ main {
   margin-bottom: 0.5em;
 }
 
-#portfolio {
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 51px;
   margin-bottom: 57px;
   position: relative;
 }
-#portfolio h2 {
-  text-align: center;
+.portfolio--logged {
+  gap: 92px;
+}
+.portfolio__title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 #contact {
@@ -118,20 +128,6 @@ footer nav ul {
   grid-column-gap: 18px;
   grid-row-gap: 16px;
 }
-.gallery__figure {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 7px;
-}
-.gallery__figure img {
-  width: 100%;
-  height: 100%;
-  max-height: 407px;
-  max-width: 305px;
-  -o-object-fit: fill;
-     object-fit: fill;
-}
 
 .navbar__list {
   display: flex;
@@ -149,12 +145,13 @@ footer nav ul {
 }
 .navbar__icon {
   width: 22px;
+  font-weight: 900;
 }
 
 .filter {
   width: -moz-fit-content;
   width: fit-content;
-  margin: 51px auto;
+  margin: 0 auto;
   display: none;
 }
 .filter__list {
@@ -337,15 +334,6 @@ footer nav ul {
   margin-right: 10px;
 }
 
-.title-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-bottom: 92px;
-}
-
 .modal {
   display: flex;
   flex-direction: column;
@@ -449,6 +437,8 @@ footer nav ul {
 .btn-primary {
   position: absolute;
   bottom: 45px;
+  justify-content: center;
+  align-items: center;
   width: 237px;
   height: 36px;
   border: none;
@@ -571,6 +561,12 @@ footer nav ul {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.add-picture__preview--active {
+  display: block;
+}
+.add-picture__preview--active ~ .add-picture__wrapper {
+  display: none;
+}
 
 .custom-select {
   position: relative;
@@ -624,4 +620,26 @@ footer nav ul {
 }
 .custom-select__item:hover {
   background-color: #E8F1F6;
+}
+
+.notification-modal {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 75px;
+  border-radius: 10px;
+  background-color: #FFFEF8;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.notification-modal__text {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 2rem;
 }/*# sourceMappingURL=index.css.map */
