@@ -10,7 +10,7 @@ export const setLogoutLink = () => {
     });
 }
 
-export const setActiveLink = () => {
+export const setActiveNavLink = () => {
     const nav_list_items_link = document.querySelectorAll('.navbar__link');
 
     nav_list_items_link.forEach((link) => {
@@ -26,3 +26,4 @@ export const setActiveLink = () => {
         });
     });
 };
+setActiveNavLink();
