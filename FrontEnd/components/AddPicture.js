@@ -30,6 +30,7 @@ class AddPicture {
         if (this._file) {
             const fileSizeInMB = this._file.size / (1024 * 1024); console.log('fileSizeInMB:', fileSizeInMB);
             if (fileSizeInMB > 4) {
+                this.add_picture_input.value = '';
                 alert("Le fichier est trop grand. Veuillez choisir un fichier de moins de 4 Mo.");
                 return;
             }
@@ -44,7 +45,6 @@ class AddPicture {
     }
 
     init() {
-        console.log('Initializing AddPicture...');
         this.add_picture_input.addEventListener('change', this.handleInputChange.bind(this));
     }
 }
