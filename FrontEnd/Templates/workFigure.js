@@ -1,24 +1,5 @@
 import { worksBus } from '../services/eventBus.js';
 
-/**
- * @class WorkFigure
- * @classdesc Crée un élément workFigure
- * 
- * @property {object} _work - objet work
- * @property {boolean} _isInModal - true si l'élément est dans la modal
- * 
- * @method createImgElement - crée l'élément image
- * @method createFigcaptionElement - crée l'élément figcaption
- * @method createDeleteBtn - crée le bouton delete
- * @method createWorkFigure - crée l'élément workFigure
- * 
- * @returns {HTMLElement} - retourne l'élément workFigure
- * 
- * @example 
- * const workFigure = new WorkFigure(work, false).createWorkFigure(); - crée l'élément workFigure pour la gallery
- * const modalWorkFigure = new WorkFigure(work, true).createWorkFigure(); - crée l'élément workFigure pour la modal 
- */
-
 export class WorkFigure {
     constructor(work, isInModal = false) {
         this._work = work;
