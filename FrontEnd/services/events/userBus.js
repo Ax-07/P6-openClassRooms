@@ -13,11 +13,11 @@ import { workForm } from "../../components/WorkForm.js";
 import { login } from "../api/logsApi.js";
 import { notification } from "../../components/Notification.js";
 
-function redirectHome() {
+const redirectHome = () => {
     window.location.href = "../index.html";
 };
 
-async function onLoginSuccess(response) {
+const onLoginSuccess = async (response) => {
     try {
         const data = await response.json();
         userBus.emit("user:setData", data);
@@ -28,7 +28,7 @@ async function onLoginSuccess(response) {
     }
 };
 
-function onLoginError(response) {
+const onLoginError = (response) => {
     userBus.emit("loginForm:login-notification", { isSuccess: false});
     switch (response.status) {
         case 404:
