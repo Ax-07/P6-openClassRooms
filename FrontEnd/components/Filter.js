@@ -8,6 +8,7 @@ class Filter {
         this._filterList = document.querySelector('.filter__list');
         this._selectedFilter = "Tous";
     }
+
     setCategories(categories) {
         this._categories = new Set(["Tous"]);
         categories.forEach((category) => {
@@ -18,9 +19,10 @@ class Filter {
         console.log("setCategories :", this._categories);
         this.render();
     }
+
     setActiveFilter(selectedFilter) {
         this._categories.forEach((category) => {
-            const item = document.querySelector(`.filter__item--${category.replace(/[&\s]/g, "")}`);
+            const item = document.querySelector(`.filter__item--${category.replace(/[&\s]/g, "")}`); // Trouver l'élément spécifique à la catégorie (la regex supprime les "&" et les espaces pour creer un nom de class css sans espace ni caractères spéciaux).
             const label_text = item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément
             item.classList.remove('active');
             label_text.classList.remove('active');
@@ -30,10 +32,7 @@ class Filter {
         const label_text = filter__item.querySelector('.filter__label-text'); // Trouver le label-text spécifique à l'élément   
         label_text.classList.add('active');
     }
-    setFilter(selectedFilter) {
-        this._selectedFilter = selectedFilter;
-        this.setActiveFilter(selectedFilter);
-    }
+
     setFilteredWorks(works, selectedFilter) {
         this._filteredWorks = [];
         if (selectedFilter === "Tous") {
@@ -48,6 +47,7 @@ class Filter {
         console.log("setFilteredWorks :", this._filteredWorks);
         return this._filteredWorks;
     }
+
     display() {
         this._filter.style.display = 'flex';
     }
@@ -61,10 +61,12 @@ class Filter {
                 this._filterList.appendChild(filterItem);
             });
         }
+        this.setActiveFilter(this._selectedFilter);
     }
 }
 
 export const filter = new Filter();
+
 
 function createFilterInput(category) {
     const filter_input = document.createElement('input');
@@ -75,6 +77,7 @@ function createFilterInput(category) {
     filter_input.value = category;
     return filter_input;
 };
+
 function createFilterLabel(category) {
     const filter_label = document.createElement('label');
     filter_label.classList.add('filter__label');
@@ -85,6 +88,7 @@ function createFilterLabel(category) {
     filter_label.appendChild(filter_label_text);
     return filter_label;
 };
+
 function createFilterItem(category) {
     const filter__item = document.createElement('li');
     filter__item.classList.add('filter__item', `filter__item--${category.replace(/[&\s]/g, "")}`);
@@ -96,7 +100,6 @@ function createFilterItem(category) {
     filter_input.addEventListener('change', (e) => {
         e.preventDefault();
         const selectedFilter = e.target.value;
-        filter.setFilter(selectedFilter);
         worksBus.emit('filterChanged', selectedFilter);
     });
 
