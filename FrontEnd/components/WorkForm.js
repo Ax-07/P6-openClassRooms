@@ -27,7 +27,6 @@ class WorkForm {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log('add_work submit ', this._title, this._category, this._picture);
 
         if (this._picture && this._title && this._category) {
             this.form_data = new FormData();
@@ -36,12 +35,10 @@ class WorkForm {
             this.form_data.append('image', this._picture);
 
             workFormBus.emit('workForm:createWork', this.form_data);
-            console.log('form_data send:', this.form_data); // comprend pas pourquoi form_data s'affiche vide alors qu'il est remplie 
         }
     };
 
     init() {
-        console.log('Initializing WorkForm...');
         title.addEventListener('input', () => {
             workFormBus.emit('workForm:titleAdded', title.value);
         });

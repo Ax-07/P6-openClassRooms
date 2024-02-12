@@ -29,5 +29,4 @@ class WorksStore {
     }
 }
 
-// Usage
-export const storeWorks = new WorksStore(); console.log('storeWorks: ', storeWorks);
+export const storeWorks = new WorksStore();

@@ -21,7 +21,6 @@ export const displayLoginError = {
         login_input_email.classList.add('login__input--error');
         email_error.classList.add('login__error--display');
         email_error.textContent = "❌ Email incorrect";
-        console.log('displayLoginError.email');
     },
     password : () => {
         login_input_password.classList.add('login__input--error');

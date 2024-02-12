@@ -7,7 +7,6 @@ export class EditBanner {
         this._edit_btn.forEach(btn => {
             btn.addEventListener('click', () => modal.openModal());
         });
-        console.log('EditBanner executé');
     }
     
     display() {

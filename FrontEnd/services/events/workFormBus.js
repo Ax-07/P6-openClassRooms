@@ -24,20 +24,15 @@ let formData = {
 export const workFormBus_Subscription = () => {
 
     workFormBus.subscribe('workForm:pictureAdded', (picture) => {
-        console.log('workForm:picture added:', picture);
         if (picture.size <= 4*(1024*1024)) {
             fieldStates.pictureValid = true;
             formData.picture = picture;
-            console.log('workForm:picture added:', true);
             workFormBus.emit('workForm:checkFields');
-            console.log('formData:', formData);
         }
         else {
             fieldStates.pictureValid = false;
             formData.picture = '';
-            console.log('workForm:picture added:', false);
             workFormBus.emit('workForm:checkFields');
-            console.log('formData:', formData);
         }
     });
 
@@ -46,10 +41,7 @@ export const workFormBus_Subscription = () => {
         if (selectedCategory.id > 0) {
             fieldStates.categoryValid = true;
             formData.category = selectedCategory.id;
-            console.log('workForm:category selected:', true);
             workFormBus.emit('workForm:checkFields');
-            console.log('formData:', formData);
-
         }
     });
 
@@ -59,14 +51,11 @@ export const workFormBus_Subscription = () => {
             fieldStates.titleValid = true;
             formData.title = title;
             workFormBus.emit('workForm:checkFields');
-            console.log('formData:', formData);
-
         }
     });
 
     workFormBus.subscribe('workForm:formData', () => {
         workFormBus.emit('workForm:setFormData', formData);
-        console.log('workForm:form data', formData);
     });
 
     workFormBus.subscribe('workForm:checkFields', () => {
@@ -86,11 +75,9 @@ export const workFormBus_Subscription = () => {
                 storeWorks.addNewWorkToStore(data);
                 modal.closeModal();
                 worksBus.emit('workCreated', data);
-                console.log('ajout reussi')
             })
             .then(() => {
                 workFormBus.emit('workForm:resetForm');
-                console.log('workForm:reset form');
             })
             .catch((error) => {
                 console.log(error);
@@ -106,9 +93,9 @@ export const workFormBus_Subscription = () => {
     });
 
     workFormBus.subscribe('workForm:resetForm', () => {
-        addPicture.resetPicture(); console.log('reset picture', addPicture);
-        customSelect.resetSelectedCategory(); console.log('reset category', customSelect);
-        workForm.resetForm(); console.log('reset form', workForm);
+        addPicture.resetPicture();
+        customSelect.resetSelectedCategory(); 
+        workForm.resetForm();
         add_work_submit_button.disabled = true;
     });
 }

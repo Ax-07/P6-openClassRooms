@@ -22,14 +22,12 @@ class CustomSelect {
     }
 
     displaySelectorValue(category) {
-        console.log('displaySelectorValue category:', category);
         this.customSelectValue.innerText = category.name;
     }
 
     resetSelectedCategory() {
         this.selectedCategory = 'selectionner une categorie';
         this.customSelectValue.innerText = 'Choisissez une catégorie';
-        console.log('resetSelectedCategory:', this.selectedCategory);
     }
 
     init(categories) {
@@ -53,7 +51,6 @@ class CustomSelect {
     }
 
     getSelectedCategory() {
-        console.log('getSelectedCategory:', this.selectedCategory);
         return this.selectedCategory;
     }
 } 

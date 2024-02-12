@@ -16,7 +16,6 @@ class Filter {
                 this._categories.add(category.name);
             }
         });
-        console.log("setCategories :", this._categories);
         this.render();
     }
 

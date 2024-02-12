@@ -6,8 +6,8 @@ const worksUrl = `${ApiUrl}/api/works`;
 
 export const getAllData = async () => {
     try {
-        const responseCategories = await fetch(categoriesUrl);
-        const categoriesData = await responseCategories.json();
+        const responseCategories = await fetch(categoriesUrl); console.log(responseCategories);
+        const categoriesData = await responseCategories.json(); console.log(categoriesData);
 
         const responseWorks = await fetch(worksUrl);
         const worksData = await responseWorks.json();
@@ -20,7 +20,6 @@ export const getAllData = async () => {
 };
 
 export const createData = async (form_data, userToken) => {
-    console.log('form_data:', form_data, userToken);
     try {
         const response = await fetch(worksUrl, {
             method: "POST",
@@ -37,7 +36,6 @@ export const createData = async (form_data, userToken) => {
             
         } else {
             workFormBus.emit('workForm:addWork-notification', { isSuccess: false });
-            console.error("Échec de la création");
         }
     } catch (error) {
         console.error("Une erreur s'est produite lors de la création des données :", error);
@@ -54,11 +52,9 @@ export const deleteData = async (id, userToken) => {
         });
         if (response.ok) {
             workFormBus.emit('workForm:deleteWork-notification', { isSuccess: true });
-            console.log("Suppression réussie", response);
         }
         else {
             workFormBus.emit('workForm:deleteWork-notification', { isSuccess: false });
-            console.error("Échec de la suppression");
         }
     } catch (error) {
         console.error("Une erreur s'est produite lors de la suppression des données :", error);

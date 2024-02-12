@@ -29,4 +29,4 @@ class User {
     }
 }
 
-export const user = new User(); console.log('user:', user);
+export const user = new User();
