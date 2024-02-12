@@ -1,3 +1,4 @@
+import { workFormBus } from "../services/eventBus.js";
 class Modal {
     constructor() {
         this.body = document.querySelector('body');
@@ -32,6 +33,7 @@ class Modal {
         this.displayElement(this.modal_gallery);
         this.displayElement(this.modal_btn_addWork);
         this.modal_title.innerText = 'Galerie photo';
+        workFormBus.emit('workForm:resetForm');
     }
 
     displayAddWorkForm() {
